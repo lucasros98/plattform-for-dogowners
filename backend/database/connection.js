@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const {gym, running, GymModel,RunningModel} = require('./schemas');
+const {gym, running, GymModel,RunningModel} = require('../models/schemas');
 const {insert} = require('./mongo')
 
 class Connection {
@@ -17,7 +17,6 @@ class Connection {
     }
 
     static createModels() {
-        //insert({ name: 'Bröstpass', date: new Date(), bodyParts: "Bröst", time: 60 },RunningModel)
     }
 }
 
