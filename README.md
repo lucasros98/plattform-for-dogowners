@@ -7,3 +7,7 @@ The end product will be a platform where dog owners can take quizzes to learn mo
 The dog owner will also receive tips based on the dog's age, and for example when it may be a good time to start attending a puppy course and how much food the puppy should receive based on breed and age.
 
 The platform will also have a forum where dog owners can ask questions to other owners who may have been in a similar situation with their dog.
+
+### Tech stack
+
+I chose to use NextJS, which is a React-framework on the frontend, and ExpressJS for the backend. For the database I am using MongoDB for this project.
