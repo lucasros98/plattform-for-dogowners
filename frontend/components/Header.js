@@ -33,6 +33,9 @@ export default function Header() {
                 {link.title}
               </Link>
             ))}
+            <Link href="/login">
+              <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-4 rounded-full">Logga in</button>
+            </Link>
           </div>
         </div>
       </header>
