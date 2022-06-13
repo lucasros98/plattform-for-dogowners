@@ -5,10 +5,9 @@ const siteMetadata = {
   description: 'En plattform som hjälper nya hundägare med sin valp. Lär dig om hundar och följ din hunds utveckling.',
   language: 'se-SE',
   theme: 'system', // system, dark or light
-  siteUrl: 'https://lucasrosvall.com',
+  siteUrl: 'https://skaffavalp.com',
   siteLogo: '/static/images/logo.png',
   image: '/static/images/avatar.png',
-  email: 'lucasrosvall@gmail.com',
   github: 'https://github.com/lucasros98',
   locale: 'se-SE',
   analytics: {
