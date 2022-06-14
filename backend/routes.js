@@ -1,17 +1,16 @@
-const {insertGymWorkout,removeGymWorkoutById,insertOneRepMax} = require('./controllers/gymworkout')
-const {insertRunningWorkout} = require('./controllers/runningworkout')
+const {createUser,loginUser,getUser} = require('./controllers/user')
+
 
 const express = require('express');
 const router = express.Router();
 
+/**  These routes need no auth */
+router.post('/user/create', createUser);
+router.post('/user/login', loginUser);
+router.get('/user', getUser);
 
-//Gym workouts
-router.post('/insertGymWorkout', insertGymWorkout);
-router.post('/removeGymWorkoutById', removeGymWorkoutById);
-router.post('/insertOneRepMax',insertOneRepMax)
 
-//Running workouts
-router.post('/insertRunningWorkout', insertRunningWorkout);
+/**  These routes need auth */
 
 
 module.exports = router;

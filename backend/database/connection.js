@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const {gym, running, GymModel,RunningModel} = require('../models/schemas');
-const {insert} = require('./mongo')
 
 class Connection {
     static connect() {
@@ -15,13 +13,10 @@ class Connection {
         })
         .catch(err => console.log(err));
     }
-
-    static createModels() {
-    }
 }
 
 Connection.db = null;
-Connection.url = 'mongodb://localhost:27017/test'
+Connection.url = 'mongodb://localhost:27017/dogplatform'
 Connection.options = {
     useNewUrlParser: true,
     useUnifiedTopology: true

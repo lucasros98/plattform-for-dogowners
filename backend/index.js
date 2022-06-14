@@ -3,6 +3,9 @@ const http = require("http");
 const express = require('express')
 const router = require('./routes')
 const {Connection} = require('./database/connection')
+const morgan = require('morgan')
+
+
 const hostname = 'localhost';
 const bodyParser = require('body-parser')
 const port = 6090;
@@ -10,7 +13,7 @@ const app=express();
 
 
 Connection.connect();
-Connection.createModels();
+
 
 // support parsing of application/json type post data
 app.use(bodyParser.json());
@@ -25,8 +28,11 @@ app.use(function(req, res, next) {
 });
 
 
+//Logging
+app.use(morgan('combined'))
 
-app.use('/gym', router);
+
+app.use('/', router);
 
 
 //listen for request on port 3000, and as a callback function have the port listened on logged
