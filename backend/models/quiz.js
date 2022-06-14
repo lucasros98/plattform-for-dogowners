@@ -3,17 +3,22 @@ var mongoose = require('mongoose');
 //Define schemas
 var Schema = mongoose.Schema;
 
-//Schema for running workouts
+//Schema
 const quizSchema = new Schema({
-    title: String,
-    description: String,
-    questions: Array 
+    title: {
+        type: String
+    },
+    description: {
+        type: String
+    },
+    questions: [{
+        type: String
+    }],
+    answers: [{
+        type: String
+    }],
 });
 
-const UserModel = mongoose.model('QuizModel', quizSchema, 'Quizes');
 
-module.exports = {
-    QuizModel
-}
-
+module.exports = mongoose.model('Quiz', quizSchema);
 
