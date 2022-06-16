@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import siteMetadata from '@/data/siteMetadata'
+import { useState } from "react";
 import { Transition } from "@headlessui/react";
 import headerNavLinks from '@/data/headerNavLinks'
 import Link from './Link'
