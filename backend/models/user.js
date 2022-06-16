@@ -5,7 +5,7 @@ var Schema = mongoose.Schema;
 
 //Schema
 const userSchema = new Schema({
-    name: {
+    username: {
         type: String,
     },
     email: {
@@ -14,31 +14,37 @@ const userSchema = new Schema({
     },
     password: {
         type: String,
-        required:true
+        required: true
     },
     salt: {
         type: String
     },
-    created:  {
+    created: {
         type: Date,
     },
-    lastLogin:  {
+    lastLogin: {
         type: Date,
     },
     city: {
         type: String
     },
-    dog: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Dog'
-    },
     bio: {
         type: String
     },
     quizTaken: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Quiz' 
+        quiz: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Quiz'
+        },
+        score: {
+            type:Number
+        }
     }]
+});
+
+userSchema.pre('save', function(next) {
+    // do stuff
+    next();
 });
 
 module.exports = mongoose.model('User', userSchema);

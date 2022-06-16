@@ -12,12 +12,30 @@ const dogSchema = new Schema({
     breed: {
         type: String
     },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required:true
+    },
     birth: {
         type: String
     },
     created: {
-        type: String
+        type: Date
     },
+    updates: [
+        {
+            date: {
+                type: Date,
+            },
+            text: {
+                type:String
+            },
+            weight: {
+                type:Number 
+            }
+        }
+    ]
 });
 
 module.exports = mongoose.model('Dog', dogSchema);

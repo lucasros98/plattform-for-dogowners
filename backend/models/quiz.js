@@ -14,6 +14,9 @@ const quizSchema = new Schema({
     questions: [{
         type: String
     }],
+    alternatives: [{
+        type: String
+    }],
     answers: [{
         type: String
     }],
