@@ -30,16 +30,16 @@ export default function Login() {
           <input type="hidden" name="remember" value="true" />
           <div className="">
             <div>
-              <label for="email-address" className="sr-only">Email address</label>
-              <input id="email-address" name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} autocomplete="email" required className="appearance-none  my-2 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none rounded focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email" />
+              <label htmlFor="email-address" className="sr-only">Email address</label>
+              <input id="email-address" name="email" type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" required className="appearance-none  my-2 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none rounded focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email" />
             </div>
             <div>
-              <label for="password" className="sr-only">Password</label>
-              <input id="password" name="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} autocomplete="password" required className="appearance-none my-2 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Lösenord" />
+              <label htmlFor="password" className="sr-only">Password</label>
+              <input id="password" name="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="password" required className="appearance-none my-2 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Lösenord" />
             </div>
             <div>
-              <label for="password" className="sr-only">Password</label>
-              <input id="password" name="password" type="password" value={spassword} onChange={(e) => setSPassword(e.target.value)} autocomplete="new-password" required className="appearance-none my-2 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Lösenord" />
+              <label htmlFor="password" className="sr-only">Password</label>
+              <input id="password" name="password" type="password" value={spassword} onChange={(e) => setSPassword(e.target.value)} autoComplete="new-password" required className="appearance-none my-2 relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Lösenord" />
             </div>
           </div>
 
