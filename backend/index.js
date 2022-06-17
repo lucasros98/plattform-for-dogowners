@@ -4,13 +4,18 @@ const express = require('express')
 const router = require('./routes')
 const {Connection} = require('./database/connection')
 const morgan = require('morgan')
+const passport = require('passport');
+const bodyParser = require('body-parser')
+
+const session = require('express-session')
+const RedisStore = require('connect-redis')(session)
+
+const User = require('./models/user');
 
 
 const hostname = 'localhost';
-const bodyParser = require('body-parser')
 const port = 6090;
 const app=express();
-
 
 Connection.connect();
 

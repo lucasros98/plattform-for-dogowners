@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+const passportLocalMongoose = require('passport-local-mongoose');
 
 //Define schemas
 var Schema = mongoose.Schema;
@@ -10,7 +11,8 @@ const userSchema = new Schema({
     },
     email: {
         type: String,
-        required: true
+        required: true,
+        unique:true
     },
     password: {
         type: String,
@@ -21,6 +23,7 @@ const userSchema = new Schema({
     },
     created: {
         type: Date,
+        default: Date.now
     },
     lastLogin: {
         type: Date,
@@ -42,7 +45,11 @@ const userSchema = new Schema({
     }]
 });
 
+userSchema.plugin(passportLocalMongoose);
+
+//hash password
 userSchema.pre('save', function(next) {
+    console.log(this)
     // do stuff
     next();
 });
