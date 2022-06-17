@@ -21,7 +21,8 @@ const dogSchema = new Schema({
         type: String
     },
     created: {
-        type: Date
+        type: Date,
+        default: Date.now
     },
     updates: [
         {
