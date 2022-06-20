@@ -37,6 +37,10 @@ exports.loginUser = (req, res, next) => {
             const body = { _id: user._id, email: user.email };
             const token = jwt.sign({ user: body }, process.env.JWT_TOP_SECRET);
 
+            //set cookie
+            res.cookie('token',token,{ maxAge: 2 * 60 * 60 * 1000, httpOnly: true });  // maxAge: 2 hours
+
+
             return res.json({ token, user, success: true, });
           }
         );
@@ -50,7 +54,8 @@ exports.loginUser = (req, res, next) => {
 //test route auth
 exports.test = async (req, res, next) => {
   res.json({
-    message: 'successful'
+    message: 'successful',
+    data:req.user
   });
 }
 
