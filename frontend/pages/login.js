@@ -1,9 +1,41 @@
 import { useState } from "react"
+import axios from "axios"
+import endpoints from "../endpoints/user"
+import router from 'next/router'
+
 
 export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
 
+  function loginUser(e) {
+    e.preventDefault()
+
+    const data = {
+      email, password
+    }
+
+    axios.post(endpoints.login, data).then((res) => {
+      if (res.data.success) {
+        
+        const token = res.data.token;
+        const user = res.data.user;
+
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("token", token)
+          sessionStorage.setItem("user",JSON.stringify(user))  
+        }
+        //redirect to login
+        router.push('/user')
+      }
+
+      else {
+        alert("Failed")
+      }
+    }).catch((err) => {
+      console.log(err.message)
+    })
+  }
 
   return (<>
     <div className="min-h-full flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -11,7 +43,7 @@ export default function Login() {
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-100">Inloggning</h2>
         </div>
-        <form className="mt-8 space-y-6" action="#" method="POST">
+        <form className="mt-8 space-y-6" action="#" onSubmit={(e) => loginUser(e)}>
           <input type="hidden" name="remember" value="true" />
           <div className="rounded-md shadow-sm -space-y-px">
             <div>

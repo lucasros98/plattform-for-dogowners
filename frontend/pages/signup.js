@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 import endpoints from "../endpoints/user"
+import router from 'next/router'
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -10,12 +11,27 @@ export default function Login() {
   function createUser(e) {
     e.preventDefault()
 
-    const data = {
-        email,password
+    if (password !== spassword) {
+      alert("Passwords don't match.")
+      return;
     }
-    
-    axios.post(endpoints.create,data).then((res)=> {
-        alert(JSON.stringify(res))
+
+    const data = {
+      email, password
+    }
+
+    axios.post(endpoints.signup, data).then((res) => {
+      if (res.data.success) {
+        alert(res.data.message)
+
+        //redirect to login
+        router.push('/login')
+      }
+      else {
+        alert("Failed")
+      }
+    }).catch((err) => {
+      console.log(err.message)
     })
   }
 

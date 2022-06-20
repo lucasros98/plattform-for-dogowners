@@ -1,3 +1,4 @@
 export default {
-    create:"http://localhost:6090/user/create"
+    signup:"http://localhost:6090/signup",
+    login:"http://localhost:6090/login"
 }

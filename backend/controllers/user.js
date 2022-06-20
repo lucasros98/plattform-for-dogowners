@@ -5,15 +5,15 @@ const jwt = require('jsonwebtoken');
 //does not work
 exports.createUser = async (req, res, next) => {
   res.json({
+    success: true,
     message: 'Signup successful',
     user: req.user
   });
 }
 
-
-exports.loginUser = (req, res,next) => {
-  const {email,password} = req.body;
-  if(!email || !password) {
+exports.loginUser = (req, res, next) => {
+  const { email, password } = req.body;
+  if (!email || !password) {
     res.send("Missing email or password");
     return;
   }
@@ -36,7 +36,7 @@ exports.loginUser = (req, res,next) => {
             const body = { _id: user._id, email: user.email };
             const token = jwt.sign({ user: body }, process.env.JWT_TOP_SECRET);
 
-            return res.json({ token,user });
+            return res.json({ token, user, success: true, });
           }
         );
       } catch (error) {
@@ -45,7 +45,7 @@ exports.loginUser = (req, res,next) => {
     }
   )(req, res, next);
 }
-
+ 
 //test route auth
 exports.test = async (req, res, next) => {
   res.json({

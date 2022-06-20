@@ -1,6 +1,7 @@
 //Load HTTP module
 require('dotenv').config();
 const express = require('express')
+var cors = require('cors')
 const router = require('./routes')
 
 const {Connection} = require('./database/connection')
@@ -14,6 +15,9 @@ const app=express();
 Connection.connect();
 
 require('./authentication/init');
+
+app.use(cors())
+
 
 // support parsing of application/json type post data
 app.use(bodyParser.json());
@@ -33,6 +37,11 @@ app.use(morgan('combined'))
 
 app.use('/', router);
 
+
+app.use((err, req, res, next) => {
+  console.error(err.stack)
+  res.status(500).send(error)
+})
 
 //listen for request on port 3000, and as a callback function have the port listened on logged
 app.listen(port, hostname, () => {
