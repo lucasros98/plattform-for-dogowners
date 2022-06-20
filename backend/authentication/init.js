@@ -1,30 +1,71 @@
 const passport = require('passport')
-const bcrypt = require('bcrypt')
-import User from '../models/user'
+const User =  require('../models/user')
 const LocalStrategy = require('passport-local').Strategy
+const JWTstrategy = require('passport-jwt').Strategy;
+const ExtractJWT = require('passport-jwt').ExtractJwt;
 
-passport.use(new LocalStrategy(
- (username, password, done) => {
-    User.find(username, (err, user) => {
-      if (err) {
-        return done(err)
+passport.use(
+  'signup',
+  new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password'
+    },
+    async (email, password, done) => {
+      try {
+        const user = await User.create({ email, password });
+
+        return done(null, user);
+      } catch (error) {
+        done(error);
       }
+    }
+  )
+);
 
-      // User not found
-      if (!user) {
-        return done(null, false)
+passport.use(
+  'login',
+  new LocalStrategy(
+    {
+      usernameField: 'email',
+      passwordField: 'password'
+    },
+    async (email, password, done) => {
+      try {
+        const user = await User.findOne({ email });
+
+        if (!user) {
+          return done(null, false, { message: 'User not found' });
+        }
+
+        const validate = await user.isValidPassword(password);
+
+        if (!validate) {
+          return done(null, false, { message: 'Wrong Password' });
+        }
+
+        return done(null, user, { message: 'Logged in Successfully' });
+      } catch (error) {
+        return done(error);
       }
+    }
+  )
+);
 
-      // Always use hashed passwords and fixed time comparison
-      bcrypt.compare(password, user.passwordHash, (err, isValid) => {
-        if (err) {
-          return done(err)
-        }
-        if (!isValid) {
-          return done(null, false)
-        }
-        return done(null, user)
-      })
-    })
-  }
-))
+// JWT AUTH
+passport.use(
+  new JWTstrategy(
+    {
+      secretOrKey: process.env.JWT_TOP_SECRET,
+      jwtFromRequest: ExtractJWT.fromHeader('secret_token')
+    },
+    async (token, done) => {
+
+      try {
+        return done(null, token.user);
+      } catch (error) {
+        done(error);
+      }
+    }
+  )
+);

@@ -1,85 +1,55 @@
 const User = require('../models/user');
 const passport = require('passport')
-const bcrypt = require('bcrypt')
-const LocalStrategy = require('passport-local').Strategy
+const jwt = require('jsonwebtoken');
 
 //does not work
-exports.createUser = async (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
+exports.createUser = async (req, res, next) => {
+  res.json({
+    message: 'Signup successful',
+    user: req.user
+  });
+}
 
-    if (email && password) {
-        const user = await User.create({
-            email, password
-        })
 
-        return res.send(user)
+exports.loginUser = (req, res,next) => {
+  const {email,password} = req.body;
+  if(!email || !password) {
+    res.send("Missing email or password");
+    return;
+  }
+
+  passport.authenticate(
+    'login',
+    async (err, user, info) => {
+      try {
+        if (err || !user) {
+          const error = new Error('An error occurred.');
+
+          return next(error);
+        }
+
+        req.login(
+          user,
+          { session: false },
+          async (error) => {
+            if (error) return next(error);
+            const body = { _id: user._id, email: user.email };
+            const token = jwt.sign({ user: body }, process.env.JWT_TOP_SECRET);
+
+            return res.json({ token,user });
+          }
+        );
+      } catch (error) {
+        return next(error);
+      }
     }
-    else {
-        return res.send("res")
-    }
+  )(req, res, next);
 }
 
-
-exports.loginUser = (req, res, next) => {
-    passport.authenticate('local',
-        (err, user, info) => {
-            if (err) {
-                return next(err);
-            }
-
-            if (!user) {
-                return res.redirect('/login?info=' + info);
-            }
-
-            req.logIn(user, function (err) {
-                if (err) {
-                    return next(err);
-                }
-
-                return res.redirect('/');
-            });
-
-        })
-        (req, res, next);
-};
-
-exports.loginUser = (req, res) => {
-    const email = req.body.email;
-    const password = req.body.password;
-
-    res.send("not finished")
+//test route auth
+exports.test = async (req, res, next) => {
+  res.json({
+    message: 'successful'
+  });
 }
 
-exports.getUser = (req, res) => {
-
-    res.send("not finished")
-}
-
-function auth(email,password) {
-    passport.use(new LocalStrategy(
-        (email, password, done) => {
-           User.findUser(email, (err, user) => {
-             if (err) {
-               return done(err)
-             }
-       
-             // User not found
-             if (!user) {
-               return done(null, false)
-             }
-       
-             // Always use hashed passwords and fixed time comparison
-             bcrypt.compare(password, user.passwordHash, (err, isValid) => {
-               if (err) {
-                 return done(err)
-               }
-               if (!isValid) {
-                 return done(null, false)
-               }
-               return done(null, user)
-             })
-           })
-         }
-       ))
-}

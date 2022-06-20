@@ -1,17 +1,11 @@
 //Load HTTP module
-const http = require("http");
+require('dotenv').config();
 const express = require('express')
 const router = require('./routes')
+
 const {Connection} = require('./database/connection')
 const morgan = require('morgan')
-const passport = require('passport');
 const bodyParser = require('body-parser')
-
-const session = require('express-session')
-const RedisStore = require('connect-redis')(session)
-
-const User = require('./models/user');
-
 
 const hostname = 'localhost';
 const port = 6090;
@@ -19,6 +13,7 @@ const app=express();
 
 Connection.connect();
 
+require('./authentication/init');
 
 // support parsing of application/json type post data
 app.use(bodyParser.json());
@@ -35,7 +30,6 @@ app.use(function(req, res, next) {
 
 //Logging
 app.use(morgan('combined'))
-
 
 app.use('/', router);
 
