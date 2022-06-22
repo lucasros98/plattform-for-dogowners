@@ -1,24 +1,31 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import headerNavLinks from '@/data/headerNavLinks'
 import Link from './Link'
+import Cookies from 'universal-cookie';
 import LoginModal from "./LoginModal";
 
+
 function Navbar() {
+	const cookies = new Cookies();
 	const [isOpen, setIsOpen] = useState(false);
 	const [login,setLogin] = useState(false)
+	const [loggedIn,setLoggedIn] = useState(false)
 
-	if (typeof window !== "undefined") {
-		try {
-			let user = sessionStorage.getItem("user")
-			if (user) user = JSON.parse(user)
+	useEffect(() => {
+		if (typeof window !== "undefined") {
+			try {
+				let user = sessionStorage.getItem("user")
+				if (user) setLoggedIn(true)
+				console.log(user)
+			}
+			catch(err) {
+					
+			}
 		}
-		catch(err) {
-				
-		}
+	},[])
 
 
-	}
 
 	return (
 		<>
@@ -47,7 +54,15 @@ function Navbar() {
 												{link.title}
 											</Link>
 										))}
-										<button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-4 rounded-full" data-modal-toggle="authentication-modal" onClick={() => setLogin(true)}>Logga in</button>
+										{loggedIn ? <Link
+												href={"/profile"}
+												smooth={"true"}
+												offset={50}
+												duration={500}
+												className="cursor-pointer hover:bg-blue-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
+											>
+											Profil
+											</Link>: <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-4 rounded-full" data-modal-toggle="authentication-modal" onClick={() => setLogin(true)}>Logga in</button>}
 
 									</div>
 								</div>
@@ -126,6 +141,18 @@ function Navbar() {
 											{link.title}
 										</Link>
 									))}
+									{loggedIn ?
+									<Link
+									href="/profile"
+									smooth={true}
+									offset={50}
+									duration={500}
+									className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+									key="profile"
+
+								>
+									Profil
+								</Link>:
 									<Link
 										href="/login"
 										smooth={true}
@@ -136,7 +163,7 @@ function Navbar() {
 
 									>
 										Logga in
-									</Link>
+									</Link>}
 
 
 								</div>

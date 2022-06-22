@@ -1,4 +1,5 @@
 import axios from "axios"
+import {useEffect,useState} from "react"
 
 
 export async function getServerSideProps({ req, res }) {
@@ -10,7 +11,11 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const Profile = ({ data }) => {
-    const user =  data && data.user
+    const [user,setUser] = useState(data && data.user)
+
+    useEffect(()=> {
+        if(data && data.user) setUser(data.user)
+    },[data])
 
     if(!user) return <div>Loading..</div>
 

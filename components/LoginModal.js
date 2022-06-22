@@ -23,6 +23,8 @@ export default function LoginModal({ visible, setVisible }) {
     function loginUser(e) {
         e.preventDefault()
 
+        close()
+
         const data = {
             email, password
         }
@@ -36,7 +38,7 @@ export default function LoginModal({ visible, setVisible }) {
                     sessionStorage.setItem("user", JSON.stringify(user))
                 }
                 //redirect to login
-                router.push('/profile')
+                router.push('/profile', undefined, { shallow: true })
             }
 
             else {
