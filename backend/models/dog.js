@@ -20,6 +20,9 @@ const dogSchema = new Schema({
     birth: {
         type: String
     },
+    weight: {
+        type: String
+    },
     created: {
         type: Date,
         default: Date.now
@@ -28,9 +31,11 @@ const dogSchema = new Schema({
         {
             date: {
                 type: Date,
+                default: Date.now
             },
             text: {
-                type:String
+                type:String,
+                required:true
             },
             weight: {
                 type:Number 

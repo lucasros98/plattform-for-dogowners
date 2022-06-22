@@ -26,7 +26,7 @@ export default function Login() {
           sessionStorage.setItem("user",JSON.stringify(user))  
         }
         //redirect to login
-        router.push('/user')
+        router.push('/profile')
       }
 
       else {
