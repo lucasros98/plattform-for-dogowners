@@ -7,6 +7,19 @@ import LoginModal from "./LoginModal";
 function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [login,setLogin] = useState(false)
+
+	if (typeof window !== "undefined") {
+		try {
+			let user = sessionStorage.getItem("user")
+			if (user) user = JSON.parse(user)
+		}
+		catch(err) {
+				
+		}
+
+
+	}
+
 	return (
 		<>
 			<LoginModal visible={login} setVisible={setLogin}/>

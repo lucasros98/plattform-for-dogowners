@@ -1,8 +1,18 @@
 import axios from "axios"
 
 
+export async function getServerSideProps({ req, res }) {
+    let user = null;
+    if (req.user)
+        user = req.user
+
+    return { props: { data: user } }
+}
+
 const Profile = ({ data }) => {
-    console.log(data)
+    const user =  data && data.user
+
+    if(!user) return <div>Loading..</div>
 
     // Show the user. No loading state is required
     return (
@@ -12,7 +22,7 @@ const Profile = ({ data }) => {
                     <div className="w-full md:w-4/12 md:mx-2">
                         <div className="bg-white p-4 rounded-lg">
                             <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">Kalle Karlsson</h1>
-                            <h3 className="text-gray-600 font-lg text-semibold leading-6">kalle@gmail.com</h3>
+                            <h3 className="text-gray-600 font-lg text-semibold leading-6">{user.email}</h3>
                             <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">Detta är en bio. Där man kan skriva om sin profil</p>
                             <ul
                                 className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
@@ -78,33 +88,5 @@ const Profile = ({ data }) => {
     )
 }
 
-export const getServerSideProps = async (ctx) => {
-
-    try {            
-        const res = await axios.get(`http://localhost:3000/getUser`).then((res) => {
-            console.log(res)
-        })
-        const userData = res.data;
-
-        if (!userData) {
-            return {
-                 props: { notFound: true } ,
-            }
-        }
-
-        return {
-            props: {
-                userData
-
-            }
-        }
-
-    } catch (error) {
-        return { props: {hello:"hel"} }
-    }
-
-
-
-}
 
 export default Profile

@@ -46,6 +46,7 @@ const userSchema = new Schema({
     }]
 });
 
+
 //hash password
 userSchema.pre('save', async function(next) {
     const user = this;

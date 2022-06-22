@@ -1,6 +1,6 @@
 import { useState } from "react"
 import axios from "axios"
-import endpoints from "../endpoints/user"
+import endpoints from "../data/userEndpoints"
 import router from 'next/router'
 
 

@@ -57,10 +57,10 @@ app.prepare().then(() => {
     //support parsing of application/x-www-form-urlencoded post data
     server.use(bodyParser.urlencoded({ extended: true }));
 
-    server.use(morgan('combined'))
 
 
     server.use(router);
+    router.use(morgan('combined'))
 
 
     // handling everything else with Next.js
