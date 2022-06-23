@@ -21,7 +21,6 @@ passport.use(
             passwordField: "password",
         },
         async (email, password, done) => {
-            console.log("fij")
             try {
                 const user = await User.findOne({ email: email });
                 if (!user) return done(null, false);
@@ -31,7 +30,6 @@ passport.use(
                 // if passwords match return user
                 return done(null, user);
             } catch (error) {
-                console.log(error)
                 return done(error, false);
             }
         }

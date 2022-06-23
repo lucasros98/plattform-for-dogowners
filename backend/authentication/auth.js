@@ -10,7 +10,6 @@ function verifyAuth(req, res, next) {
     }
 
     jwt.verify(token, process.env.JWT_TOP_SECRET, (err, user) => {
-      console.log(err)
   
       if (err) {
         res.clearCookie("token");

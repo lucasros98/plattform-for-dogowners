@@ -94,3 +94,19 @@ exports.getUserInfo = async(req, res, next) => {
     res.status(500).send(err)
   }
 }
+
+exports.updateUser = async(req, res, next) => {
+  const userId = req.user.user._id;
+
+  const {username,city,bio} = req.body;
+
+  const updateFields = {username,city,bio}
+
+  try {
+    const user = await User.findOneAndUpdate({_id:userId}, updateFields,{new: true});
+    return res.send({user})
+  }
+  catch(err) {
+    res.status(500).send(err)
+  }
+}
