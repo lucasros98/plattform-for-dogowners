@@ -1,5 +1,6 @@
-const { createUser, loginUser,getUser,logoutUser} = require('./backend/controllers/user')
-const passport = require('passport')
+const { createUser, loginUser,getUserInfo,logoutUser} = require('./backend/controllers/user')
+const { createDog,getDogsByOwner} = require('./backend/controllers/dog')
+
 const verifyAuth = require('./backend/authentication/auth')
 const express = require('express');
 const router = express.Router();
@@ -11,10 +12,15 @@ router.post('/login', loginUser);
 router.post('/logout', logoutUser);
 
 
-router.get('/getUser',verifyAuth, getUser);
+router.get('/user',verifyAuth, getUserInfo);
+router.post('/dog/create',verifyAuth, createDog);
+router.get('/dog',verifyAuth, getDogsByOwner);
+
+
 
 //Next pages with auth
 router.get('/profile',verifyAuth, (req,res,next) => next());
+router.get('/ny-hund',verifyAuth, (req,res,next) => next());
 
 
 module.exports = router;

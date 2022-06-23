@@ -1,12 +1,10 @@
 const User = require('../models/user');
+const Dog = require('../models/dog');
 const passport = require('passport')
 const jwt = require('jsonwebtoken');
-const next = require("next");
 const {validateEmail} = require('../utils/validation')
 
 
-
-//does not work
 exports.createUser = async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {
@@ -84,6 +82,15 @@ exports.logoutUser = (req,res, next) => {
   return res.send({success:true,message:"Logout"})
 }
 
-exports.getUser = (req, res, next) => {
- res.send(req.user)
+exports.getUserInfo = async(req, res, next) => {
+  const userId = req.user.user._id;
+
+  try {
+    const user = await User.findById(userId);
+    const dogs = await Dog.find({owner:userId})
+    return res.send({user,dogs})
+  }
+  catch(err) {
+    res.status(500).send(err)
+  }
 }

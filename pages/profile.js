@@ -1,5 +1,6 @@
 import axios from "axios"
-import {useEffect,useState} from "react"
+import { useEffect, useState } from "react"
+import DogInfo from "../components/Profile/DogInfo"
 
 
 export async function getServerSideProps({ req, res }) {
@@ -11,13 +12,37 @@ export async function getServerSideProps({ req, res }) {
 }
 
 const Profile = ({ data }) => {
-    const [user,setUser] = useState(data && data.user)
+    const [loading, setLoading] = useState(true)
+    const [user, setUser] = useState(null)
+    const [dogs, setDogs] = useState(null)
 
-    useEffect(()=> {
-        if(data && data.user) setUser(data.user)
-    },[data])
+    const getData = async () => {
+        try {
+            let res = await axios.get("http://localhost:3000/user")
+            console.log(res.data)
 
-    if(!user) return <div>Loading..</div>
+            if (res.data && res.data.user) {
+                setUser(res.data.user)
+                setDogs(res.data.dogs)
+                setLoading(false)
+            }
+            else {
+                //error
+                throw Error("Error")
+            }
+
+        }
+        catch (err) {
+
+        }
+    };
+
+
+    useEffect(() => {
+        getData()
+    },[]);
+
+    if (loading) return <div>Loading..</div>
 
     // Show the user. No loading state is required
     return (
@@ -28,12 +53,12 @@ const Profile = ({ data }) => {
                         <div className="bg-white p-4 rounded-lg">
                             <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">Kalle Karlsson</h1>
                             <h3 className="text-gray-600 font-lg text-semibold leading-6">{user.email}</h3>
-                            <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">Detta är en bio. Där man kan skriva om sin profil</p>
+                            {user.bio & <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">{user.bio}</p>}
                             <ul
                                 className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
                                 <li className="flex items-center py-3">
                                     <span>Medlem sedan</span>
-                                    <span className="ml-auto">Nov 07, 2016</span>
+                                    <span className="ml-auto">{new Date(user.created).toLocaleDateString()}</span>
                                 </li>
                             </ul>
                         </div>
@@ -43,33 +68,7 @@ const Profile = ({ data }) => {
                         </div>
                     </div>
                     <div className="w-full  mt-4 md:w-8/12 md:mx-2 md:mt-0">
-                        <div className="bg-white p-3 shadow-sm rounded-lg">
-                            <div className="ml-4  text-gray-900 font-bold text-lg leading-8 my-1">
-                                Min hund
-                            </div>
-                            <div className="text-gray-700">
-                                <div className="grid md:grid-cols-2 text-sm">
-                                    <div className="grid grid-cols-2">
-                                        <div className="px-4 py-2 font-semibold">Namn</div>
-                                        <div className="px-4 py-2">Gizmo</div>
-                                    </div>
-                                    <div className="grid grid-cols-2">
-                                        <div className="px-4 py-2 font-semibold">Ras</div>
-                                        <div className="px-4 py-2">Golden retriever</div>
-                                    </div>
-                                    <div className="grid grid-cols-2">
-                                        <div className="px-4 py-2 font-semibold">Föddes</div>
-                                        <div className="px-4 py-2">2022-03-23</div>
-                                    </div>
-                                    <div className="grid grid-cols-2">
-                                        <div className="px-4 py-2 font-semibold">Ålder</div>
-                                        <div className="px-4 py-2">3 månader</div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
+                        <DogInfo dogs={dogs}/>
 
                         <div className="my-4"></div>
 

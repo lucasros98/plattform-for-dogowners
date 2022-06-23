@@ -18,7 +18,7 @@ const dogSchema = new Schema({
         required:true
     },
     birth: {
-        type: String
+        type: Date
     },
     created: {
         type: Date,
