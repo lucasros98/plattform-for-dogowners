@@ -1,5 +1,5 @@
 const { createUser, loginUser,getUserInfo,logoutUser,updateUser} = require('./backend/controllers/user')
-const { createDog,getDogsByOwner,createNewUpdate} = require('./backend/controllers/dog')
+const { createDog,getDogsByOwner,createNewUpdate,removeDogUpdate} = require('./backend/controllers/dog')
 
 const verifyAuth = require('./backend/authentication/auth')
 const express = require('express');
@@ -19,6 +19,7 @@ router.put('/user',verifyAuth, updateUser);
 router.get('/dog',verifyAuth, getDogsByOwner);
 router.post('/dog/create',verifyAuth, createDog);
 router.post('/dog/update',verifyAuth, createNewUpdate);
+router.delete('/dog/update/:updateId',verifyAuth, removeDogUpdate);
 
 
 

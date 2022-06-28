@@ -10,7 +10,7 @@ exports.createDog = async (req, res, next) => {
     const owner = req.user.user._id;
     try {
         const dog = await Dog.find({ owner });
-        if(dog) res.send("Dog already exist")
+        if (dog) res.send("Dog already exist")
 
 
         const newDog = await Dog.create({ name, breed, birth, owner });
@@ -48,15 +48,31 @@ exports.getDogsByOwner = async (req, res, next) => {
 
 exports.createNewUpdate = async (req, res, next) => {
     const owner = req.user.user._id;
-    const {text,weight,activityTime} = req.body;
+    const { text, weight, activityTime } = req.body;
 
-    if(!text) return res.status(400).send("Text is required")
+    if (!text) return res.status(400).send("Text is required")
 
-    const body ={text,weight,activityTime}
+    const body = { text, weight, activityTime }
 
     try {
-        const dog = await Dog.findOneAndUpdate({ owner },{ $addToSet: { updates: body } },{new: true});
-        return res.send({success:true,dog:dog})
+        const dog = await Dog.findOneAndUpdate({ owner }, { $addToSet: { updates: body } }, { new: true });
+        return res.send({ success: true, dog: dog })
+    }
+    catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message,
+        })
+    }
+}
+
+exports.removeDogUpdate = async (req, res, next) => {
+    const owner = req.user.user._id;
+    const updateId = req.params.updateId;
+
+    try {
+        const dog = await Dog.findOneAndUpdate({ owner }, { $pull: { updates: { _id: updateId } } }, { new: true });
+        return res.send({ success: true, dog: dog })
     }
     catch (err) {
         res.status(500).json({
