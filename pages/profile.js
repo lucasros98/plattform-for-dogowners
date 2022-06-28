@@ -1,6 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import DogInfo from "../components/Profile/DogInfo"
+import DogInfo from "@/components/Profile/DogInfo"
+import DogUpdate from "@/components/Profile/DogUpdate"
+import NewPostModal from "@/components/Profile/NewPostModal"
 
 
 export async function getServerSideProps({ req, res }) {
@@ -15,6 +17,7 @@ const Profile = ({ data }) => {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
     const [dogs, setDogs] = useState(null)
+    const [showPostForm, setShowPostForm] = useState(false)
 
     const getData = async () => {
         try {
@@ -47,6 +50,7 @@ const Profile = ({ data }) => {
     // Show the user. No loading state is required
     return (
         <div className="bg-gray-100 h-full min-h-screen	">
+            <NewPostModal visible={showPostForm} setVisible={setShowPostForm} />
             <div className="container mx-auto p-5">
                 <div className="md:flex no-wrap md:-mx-2">
                     <div className="w-full md:w-4/12 md:mx-2">
@@ -73,16 +77,21 @@ const Profile = ({ data }) => {
                         <div className="my-4"></div>
 
                         <div className="bg-white p-3 shadow-sm rounded-lg">
-                            <div className="grid grid-cols-2">
-                                <div>
-                                    <div className="text-gray-900 font-bold text-lg leading-8 my-1">
-                                        Uppdateringar
+                                <div className="w-full">
+                                    <div className="flex">
+                                        <div className="text-gray-900 font-bold text-lg leading-8 my-1">
+                                            Uppdateringar
+                                        </div>
+                                        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={(e) => setShowPostForm(true)}>Skapa ny</button>
                                     </div>
-                                    <ul className="list-inside space-y-2">
+                                    <div className="mt-2 w-full">
+                                    {false &&<ul className="list-inside space-y-2">
                                         <li className="text-gray-600">Inga uppdateringar gjorda</li>
-                                    </ul>
+                                    </ul>}
+                                    <DogUpdate/>
+                                    </div>
+                                
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>

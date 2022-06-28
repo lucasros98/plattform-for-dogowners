@@ -28,11 +28,15 @@ const dogSchema = new Schema({
         {
             date: {
                 type: Date,
+                default: Date.now
             },
             text: {
                 type:String
             },
             weight: {
+                type:Number 
+            },
+            activityTime: {
                 type:Number 
             }
         }

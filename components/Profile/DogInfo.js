@@ -1,5 +1,6 @@
 import "moment"
 import Link from "next/link"
+import moment from "moment"
 
 export default function DogInfo({ dogs=[] }) {
 
