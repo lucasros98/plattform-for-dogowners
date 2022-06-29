@@ -87,8 +87,8 @@ exports.getUserInfo = async(req, res, next) => {
 
   try {
     const user = await User.findById(userId);
-    const dogs = await Dog.find({owner:userId})
-    return res.send({user,dogs})
+    const dog = await Dog.findOne({owner:userId}).sort({ "updates.date": "asc" })
+    return res.send({user,dog})
   }
   catch(err) {
     res.status(500).send(err)

@@ -32,7 +32,7 @@ exports.getDogsByOwner = async (req, res, next) => {
     const owner = req.user.user._id;
 
     try {
-        const dog = await Dog.find({ owner });
+        const dog = await Dog.findOne({ owner }).sort({ "updates.date": "desc" });
         res.json({
             success: true,
             dog: dog
@@ -55,7 +55,7 @@ exports.createNewUpdate = async (req, res, next) => {
     const body = { text, weight, activityTime }
 
     try {
-        const dog = await Dog.findOneAndUpdate({ owner }, { $addToSet: { updates: body } }, { new: true });
+        const dog = await Dog.findOneAndUpdate({ owner }, { $addToSet: { updates: body } }, { new: true }).sort({ "updates.date": "desc" });
         return res.send({ success: true, dog: dog })
     }
     catch (err) {
@@ -71,7 +71,7 @@ exports.removeDogUpdate = async (req, res, next) => {
     const updateId = req.params.updateId;
 
     try {
-        const dog = await Dog.findOneAndUpdate({ owner }, { $pull: { updates: { _id: updateId } } }, { new: true });
+        const dog = await Dog.findOneAndUpdate({ owner }, { $pull: { updates: { _id: updateId } } }, { new: true }).sort({ "updates.date": "desc" });
         return res.send({ success: true, dog: dog })
     }
     catch (err) {

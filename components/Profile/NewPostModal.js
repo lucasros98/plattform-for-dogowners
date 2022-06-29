@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
 
-export default function NewPostModal({ visible, setVisible }) {
+export default function NewPostModal({ visible, setVisible,updateDog}) {
     const [show, setShow] = useState(false)
     const [text,setText] = useState("")
     const [weight,setWeight] = useState("")
-    const [activity,setActivity] = useState("")
+    const [activityTime,setActivity] = useState("")
 
 
     useEffect(() => {
@@ -18,7 +18,20 @@ export default function NewPostModal({ visible, setVisible }) {
     }
 
     function createPost(e) {
-       
+       e.preventDefault()
+
+       const body = {
+        text,
+        weight,
+        activityTime
+       }
+
+       axios.post("/dog/update",body).then((res)=> {
+        if(res.data.success) {
+            close()
+            updateDog(res.data.dog)
+        }
+       })
     }
 
     return (
@@ -48,8 +61,8 @@ export default function NewPostModal({ visible, setVisible }) {
                                 <input type="number" name="weight" id="weight" placeholder="5 kg" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value={weight} onChange={(e) => setWeight(e.target.value)} />
                             </div>
                             <div>
-                                <label htmlFor="activity" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Aktivitet</label>
-                                <input type="number" name="activity" id="activity" placeholder="23 min" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value={activity} onChange={(e) => setActivity(e.target.value)} />
+                                <label htmlFor="activityTime" className="block mb-2 text-sm font-medium text-gray-900 dark:text-gray-300">Aktivitet</label>
+                                <input type="number" name="activityTime" id="activityTime" placeholder="23 min" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" value={activityTime} onChange={(e) => setActivity(e.target.value)} />
                             </div>
                            
                            

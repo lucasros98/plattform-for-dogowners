@@ -2,10 +2,10 @@ import "moment"
 import Link from "next/link"
 import moment from "moment"
 
-export default function DogInfo({ dogs=[] }) {
+export default function DogInfo({ dog}) {
 
     //get first dog in array
-    const dog = dogs && dogs.length > 0 ? dogs[0] : false
+    
 
     return (
         <div className="bg-white p-3 shadow-sm rounded-lg">

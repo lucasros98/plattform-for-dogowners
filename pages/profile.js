@@ -1,8 +1,8 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import DogInfo from "@/components/Profile/DogInfo"
-import DogUpdate from "@/components/Profile/DogUpdate"
 import NewPostModal from "@/components/Profile/NewPostModal"
+import Updates from "@/components/Profile/Updates"
 
 
 export async function getServerSideProps({ req, res }) {
@@ -16,7 +16,7 @@ export async function getServerSideProps({ req, res }) {
 const Profile = ({ data }) => {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
-    const [dogs, setDogs] = useState(null)
+    const [dog, setDog] = useState(null)
     const [showPostForm, setShowPostForm] = useState(false)
 
     const getData = async () => {
@@ -26,7 +26,7 @@ const Profile = ({ data }) => {
 
             if (res.data && res.data.user) {
                 setUser(res.data.user)
-                setDogs(res.data.dogs)
+                setDog(res.data.dog)
                 setLoading(false)
             }
             else {
@@ -50,12 +50,12 @@ const Profile = ({ data }) => {
     // Show the user. No loading state is required
     return (
         <div className="bg-gray-100 h-full min-h-screen	">
-            <NewPostModal visible={showPostForm} setVisible={setShowPostForm} />
+            <NewPostModal visible={showPostForm} setVisible={setShowPostForm} updateDog={setDog}/>
             <div className="container mx-auto p-5">
                 <div className="md:flex no-wrap md:-mx-2">
                     <div className="w-full md:w-4/12 md:mx-2">
                         <div className="bg-white p-4 rounded-lg">
-                            <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">Kalle Karlsson</h1>
+                            <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">{user.name ?  user.name  : "Namn saknas"}</h1>
                             <h3 className="text-gray-600 font-lg text-semibold leading-6">{user.email}</h3>
                             {user.bio & <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">{user.bio}</p>}
                             <ul
@@ -72,7 +72,7 @@ const Profile = ({ data }) => {
                         </div>
                     </div>
                     <div className="w-full  mt-4 md:w-8/12 md:mx-2 md:mt-0">
-                        <DogInfo dogs={dogs}/>
+                        <DogInfo dog={dog}/>
 
                         <div className="my-4"></div>
 
@@ -88,7 +88,7 @@ const Profile = ({ data }) => {
                                     {false &&<ul className="list-inside space-y-2">
                                         <li className="text-gray-600">Inga uppdateringar gjorda</li>
                                     </ul>}
-                                    <DogUpdate/>
+                                    <Updates user={user} updates={dog.updates} updateDog={setDog}/>
                                     </div>
                                 
                                 </div>
