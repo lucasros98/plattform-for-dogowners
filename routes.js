@@ -1,7 +1,8 @@
 const { createUser, loginUser,getUserInfo,logoutUser,updateUser} = require('./backend/controllers/user')
 const { createDog,getDogsByOwner,createNewUpdate,removeDogUpdate} = require('./backend/controllers/dog')
-
+const { getImage,uploadImage} = require('./backend/controllers/image')
 const verifyAuth = require('./backend/authentication/auth')
+const upload = require('./backend/utils/upload')
 const express = require('express');
 const router = express.Router();
 
@@ -20,6 +21,10 @@ router.get('/dog',verifyAuth, getDogsByOwner);
 router.post('/dog/create',verifyAuth, createDog);
 router.post('/dog/update',verifyAuth, createNewUpdate);
 router.delete('/dog/update/:updateId',verifyAuth, removeDogUpdate);
+
+//IMAGE
+router.get('/image',verifyAuth, getImage);
+router.post('/image/upload',verifyAuth, upload.single('image'), uploadImage);
 
 
 
