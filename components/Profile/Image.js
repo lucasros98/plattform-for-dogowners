@@ -1,5 +1,4 @@
-export default function Updates({ image }) {
-    console.log(image.data.toString('base64'))
+export default function Image({ image }) {
     if(!image) return <></>
     return (
         <div>
