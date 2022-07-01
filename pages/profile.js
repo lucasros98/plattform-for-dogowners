@@ -2,6 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import DogInfo from "@/components/Profile/DogInfo"
 import NewPostModal from "@/components/Profile/NewPostModal"
+import ProfileImage from "@/components/Profile/Image"
 import Updates from "@/components/Profile/Updates"
 
 
@@ -16,6 +17,8 @@ export async function getServerSideProps({ req, res }) {
 const Profile = ({ data }) => {
     const [loading, setLoading] = useState(true)
     const [user, setUser] = useState(null)
+    const [image, setImage] = useState(null)
+
     const [dog, setDog] = useState(null)
     const [showPostForm, setShowPostForm] = useState(false)
 
@@ -40,10 +43,17 @@ const Profile = ({ data }) => {
         }
     };
 
+    const getProfileImage = async () => {
+        let res = await axios.get("http://localhost:3000/image")
+        console.log(res)
+        if(res.data.img) setImage(res.data.img)
+    }
 
     useEffect(() => {
         getData()
+        getProfileImage()
     },[]);
+
 
     if (loading) return <div>Loading..</div>
 
@@ -55,6 +65,7 @@ const Profile = ({ data }) => {
                 <div className="md:flex no-wrap md:-mx-2">
                     <div className="w-full md:w-4/12 md:mx-2">
                         <div className="bg-white p-4 rounded-lg">
+                            <ProfileImage image={image}/>
                             <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">{user.name ?  user.name  : "Namn saknas"}</h1>
                             <h3 className="text-gray-600 font-lg text-semibold leading-6">{user.email}</h3>
                             {user.bio & <p className="text-sm text-gray-500 hover:text-gray-600 leading-6">{user.bio}</p>}

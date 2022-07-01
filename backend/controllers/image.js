@@ -8,13 +8,13 @@ const path = require('path');
 exports.getImage = async (req, res, next) => {
     const userId = req.user.user._id;
 
-    Image.find({user:userId}, (err, items) => {
+    Image.findOne({user:userId}, (err, image) => {
         if (err) {
             console.log(err);
             res.status(500).send('An error occurred', err);
         }
         else {
-            res.send({ items: items });
+            res.send( image );
         }
     });
 };
