@@ -33,7 +33,7 @@ export default function Login() {
 
   return (<>
     <div className="bg-gray-100 h-full min-h-screen">
-      <div className="container mx-auto p-5">
+      <div className="container mx-auto">
         <div>
           <h2 className="mt-6 mb-4 text-3xl font-extrabold text-gray-700">Lägg till din hund</h2>
         </div>

@@ -45,7 +45,6 @@ const Profile = ({ data }) => {
 
     const getProfileImage = async () => {
         let res = await axios.get("http://localhost:3000/image")
-        console.log(res)
         if(res.data.img) setImage(res.data.img)
     }
 

@@ -1,6 +1,7 @@
 const { createUser, loginUser,getUserInfo,logoutUser,updateUser} = require('./backend/controllers/user')
 const { createDog,getDogsByOwner,createNewUpdate,removeDogUpdate} = require('./backend/controllers/dog')
 const { getImage,uploadImage} = require('./backend/controllers/image')
+const { getQuizes} = require('./backend/controllers/quiz')
 const verifyAuth = require('./backend/authentication/auth')
 const upload = require('./backend/utils/upload')
 const express = require('express');
@@ -26,7 +27,8 @@ router.delete('/dog/update/:updateId',verifyAuth, removeDogUpdate);
 router.get('/image',verifyAuth, getImage);
 router.post('/image/upload',verifyAuth, upload.single('image'), uploadImage);
 
-
+//QUIZES
+router.get('/quizes', getQuizes); //NO AUTH
 
 //Next pages with auth
 router.get('/profile',verifyAuth, (req,res,next) => next());
