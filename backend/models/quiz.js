@@ -12,10 +12,12 @@ const quizSchema = new Schema({
         type: String
     },
     questions: [{
-        type: String
-    }],
-    alternatives: [{
-        type: String
+        text: {
+            type: String,
+        },
+        options: [{
+            type: String,
+        }],
     }],
     answers: [{
         type: String
