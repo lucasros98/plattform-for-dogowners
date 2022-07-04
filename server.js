@@ -25,7 +25,7 @@ Connection.connect();
 const dev = process.env.NODE_ENV !== "production";
 const app = next({
   dev,
-  dir: "."
+  dir: "./frontend"
 });
 const handle = app.getRequestHandler();
 
