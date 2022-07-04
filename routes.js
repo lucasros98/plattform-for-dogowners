@@ -33,6 +33,7 @@ router.get('/quizes', getQuizes); //NO AUTH
 //Next pages with auth
 router.get('/profile',verifyAuth, (req,res,next) => next());
 router.get('/ny-hund',verifyAuth, (req,res,next) => next());
+router.get('/settings',verifyAuth, (req,res,next) => next());
 
 
 module.exports = router;
