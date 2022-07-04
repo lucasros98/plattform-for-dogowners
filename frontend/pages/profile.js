@@ -28,9 +28,15 @@ const Profile = ({ data }) => {
             console.log(res.data)
 
             if (res.data && res.data.user) {
-                setUser(res.data.user)
-                setDog(res.data.dog)
+                const user = res.data.user
+                const dog = res.data.dog
+                setUser(user)
+                setDog(dog)
                 setLoading(false)
+
+                if(user.profileImage) {
+                    getProfileImage(user.profileImage)
+                }
             }
             else {
                 //error
@@ -43,14 +49,13 @@ const Profile = ({ data }) => {
         }
     };
 
-    const getProfileImage = async () => {
-        let res = await axios.get("http://localhost:3000/image")
-        if(res.data.img) setImage(res.data.img)
+    const getProfileImage = async (imageId) => {
+        let res = await axios.get("http://localhost:3000/image/"+imageId)
+        if (res.data.img) setImage(res.data.img)
     }
 
     useEffect(() => {
         getData()
-        getProfileImage()
     },[]);
 
 

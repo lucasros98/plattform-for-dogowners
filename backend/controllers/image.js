@@ -1,4 +1,4 @@
-const Dog = require('../models/dog');
+const User = require('../models/user');
 const Image = require('../models/image');
 const fs = require('fs');
 const path = require('path');
@@ -6,9 +6,10 @@ const path = require('path');
 
 
 exports.getImage = async (req, res, next) => {
+    const id = req.params.id;
     const userId = req.user.user._id;
 
-    Image.findOne({user:userId}, (err, image) => {
+    Image.findOne({user:userId,_id:id}, (err, image) => {
         if (err) {
             console.log(err);
             res.status(500).send('An error occurred', err);
@@ -19,7 +20,7 @@ exports.getImage = async (req, res, next) => {
     });
 };
 
-exports.uploadImage = async (req, res, next) => { 
+exports.uploadProfileImage = async (req, res, next) => { 
     const userId = req.user.user._id;
  
     var obj = {
@@ -31,11 +32,19 @@ exports.uploadImage = async (req, res, next) => {
             contentType: 'image/png'
         }
     }
-    Image.create(obj, (err, item) => {
-        if (err) {
-            console.log(err);
-            return res.status(400).send({success:false,message:err})
-        }
-        return res.send({success:true,image:item})  
-    })
+    try {
+        const image = await Image.create(obj);
+        const user = await User.updateOne({_id:userId},{profileImage:image._id})
+
+        res.json({
+          success: true,
+          image: image
+        });
+      }
+      catch (err) {
+        res.status(500).json({
+          success: false,
+          message: err.message,
+        })
+      }
 }

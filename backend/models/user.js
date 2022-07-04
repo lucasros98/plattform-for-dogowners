@@ -29,6 +29,10 @@ const userSchema = new Schema({
     lastLogin: {
         type: Date,
     },
+    profileImage: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Image'
+    },
     city: {
         type: String
     },
