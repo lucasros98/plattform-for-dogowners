@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 import ProfileImage from "@/components/Profile/Image"
 
 export default function Settings({ data }) {
-    const [profileImage, setUserId] = useState("")
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [bio, setBio] = useState("")
@@ -19,7 +18,6 @@ export default function Settings({ data }) {
                 setName(user.name)
                 setEmail(user.email)
                 setBio(user.bio)
-                setUserId(user._id)
 
                 if(user.profileImage) {
                     getProfileImage(user.profileImage)
@@ -48,6 +46,15 @@ export default function Settings({ data }) {
 
     function saveUser(e) {
         e.preventDefault()
+
+        const body = {
+            name,
+            email,
+            bio
+        }
+        axios.put("/user",body).then((res) => {
+            console.log(res)
+        }) 
     }
 
     function updateUserImage(e) {
@@ -93,7 +100,7 @@ export default function Settings({ data }) {
                         <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                             <div>
                                 <label className=" " htmlFor="username">Namn</label>
-                                <input id="name" type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" value={name} onChange={(e) => setEmail(e.target.name)} />
+                                <input id="name" type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" value={name} onChange={(e) => setName(e.target.value)} />
                             </div>
 
                             <div>
@@ -140,13 +147,12 @@ export default function Settings({ data }) {
                                 </div>
                             </div>
                             <div className="mt-1">
-                                {!image && <div>Ingen profilbild har blivit vald</div>}
+                                {!preview && <div>Ingen profilbild har blivit vald</div>}
                                 {preview && <ProfileImage image={preview}/>}
                             </div>
                         </div>
                         <div className="mt-4">
-                            <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Spara bild</button>
-
+                            <button type="submit" disabled={!image} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 disabled:opacity-75">Spara bild</button>
                         </div>
                     </form>
 
