@@ -1,23 +1,205 @@
 //Dog quizzes
 
-quiz1 = {
-    title:"",
-    description:"",
+const quiz1 = {
+    title:"Intressant fakta om hundar",
+    description:"I detta quizet får du lära dig massor av intressant fakta om hundar.",
     questions: [
         {
-            text:"",
-            options:[""]
+            text:"Hur många tänder har en vuxen hund?",
+            options:[16,21,32,42],
+            correctAnswerIndex:3
         },
         {
-            text:"",
-            options:[""]
-        }
-    ],
-    //Answers = Array index of questions options
-    answers:[
+            text:"Sant eller falskt: Hundar kan endast se svart- och vitt",
+            options:["SANT","FALSKT"],
+            correctAnswerIndex:3
 
+        },
+        {
+            text:"Vilket är det vanligaste träningskommandot som lärs ut till hundar?",
+            options:["Sitt","Ligg","Stanna","Gå"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Vilket är en hunds mest utvecklade sinne?",
+            options:["Smak","Lukt","Synen","Känsel"],
+            correctAnswerIndex:1
+        },
+        {
+            text:"Vilken hundras är den minsta i världen?",
+            options:["Dachshund","Shih Tzu","Pomeranian","Chihuahua"],
+            correctAnswerIndex:3
+        },
+        {
+            text:"Hur gammal blev den äldsta hunden i världen?",
+            options:["19","24","29","34"],
+            correctAnswerIndex:2
+        },
+        {
+            text:"Vilket är det vanligaste hundnamnet i Sverige för tikar?",
+            options:["Molly","Bella","Sally","Luna"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Vilken är den vanligaste hundrasen i Sverige?",
+            options:["Tysk schäferhund","Jämthund","Labrador retriever","Golden retriever"],
+            correctAnswerIndex:3
+        },
+        {
+            text:"Vad är hopprekordet i höjd för en hund?",
+            options:["173.7 cm","182.4 cm","191.7 cm","197.7 cm"],
+            correctAnswerIndex:2
+        },
+        {
+            text:"Vilken är den största hundrasen i världen?",
+            options:["Leonberger","Grand Danois","Skotsk hjorthund","Sankt bernhardshund"],
+            correctAnswerIndex:1
+        }
     ]
 }
 
 
-module.exports = [quiz1];
+const quiz2 = {
+    title:"Så sköter du din hund (Jordbruksverket)",
+    description:"Testa dina kunskaper kring hundens grundläggande behov och de regler som finns för att ha hand om hundar. Quizet är baserat på regler från Jordbruksverket.",
+    questions: [
+        {
+            text:"Hur ofta ska man rasta sin hund enligt Jordbruksverket?",
+            options:["minst varannan timme","minst var 4e timme","minst var 6e timme","minst var 8e timme"],
+            correctAnswerIndex:2
+        },
+        {
+            text:"När får man skilja hundvalpen från tiken som tidigast?",
+            options:["6 veckor","8 veckor","10 veckor","12 veckor"],
+            correctAnswerIndex:1
+        },
+        {
+            text:"Hur ofta ska man byta vatten per dag?",
+            options:["1 gång","2 gånger","3 gånger","4 gånger"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Måste man märka och registera sin hund?",
+            options:["JA","NEJ"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Vilken vaccination behöver hunden fått om ni ska åka utomlands?",
+            options:["Brucellos","Hakmask","Rabies","Kennelhosta"],
+            correctAnswerIndex:2
+        },
+        {
+            text:"Hur länge får en hund vara ensam?",
+            options:["2 timmar","4 timmar","5 timmar","6 timmar"],
+            correctAnswerIndex:3
+        },
+        {
+            text:"Mellan vilka datum får hundar inte vara där det finns vilda djur?",
+            options:["1 mars - 1 augusti","1 mars - 20 augusti","1 april - 1 augusti","1 april - 20 augusti"],
+            correctAnswerIndex:1
+        },
+        {
+            text:"Vilken är den lägsta åldern för en valp på hunddagis?",
+            options:["10 veckor","12 veckor","16 veckor","Det finns ingen"],
+            correctAnswerIndex:3
+        }
+    ]
+}
+
+const quiz3 = {
+    title:"Så sköter du din hund (Tandvård)",
+    description:"I detta quizet får du lära dig mer om tandvård för hundar.",
+    questions: [
+        {
+            text:"Rekommenderas det att borsta tänderna på sin hund?",
+            options:["JA","NEJ"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Kan man borsta tänderna med vanlig tandkräm för hund?",
+            options:["JA","NEJ"],
+            correctAnswerIndex:1
+        },
+        {
+            text:"Vilken sorts tandkräm rekommenderas ofta till hundar?",
+            options:["Enzymtandkräm","Flortandkräm","Koltandkräm","Natriumtandkräm"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Hur ofta ska man minst försöka borsta tänderna på en hund?",
+            options:["1 gång/månad","2 gånger/vecka","1 gång/vecka","3 gånger/vecka"],
+            correctAnswerIndex:2
+        },
+        {
+            text:"Vad kan hunden få om man inte borstar hundens tänder?",
+            options:["Magsjuka","Kennelhosta","Bandmask","Tandsten"],
+            correctAnswerIndex:3
+        },
+        {
+            text:"Från vad bildas tandsten för hundar?",
+            options:["bakterier och saliv","gamla matrester","hundgodis","bakterier och virus"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Vad kan vara en konsekvens av tandsten för hundar?",
+            options:["Isospora","Tandförlust","Hepatozoonos","Tuberkulos"],
+            correctAnswerIndex:1
+        },
+        {
+            text:"Kan man använda vilken tandborste som helst för hundar?",
+            options:["JA","NEJ"],
+            correctAnswerIndex:0
+        },
+    ]
+}
+
+
+const quiz4 = {
+    title:"Så sköter du din hund (Tvätt och dusch)",
+    description:"I detta quizet får du lära dig mer om hundskötsel och exempelvis mer om hundens päls och hur ofta man bör tvätta och duscha sin hund.",
+    questions: [
+        {
+            text:"",
+            options:[],
+            correctAnswerIndex:3
+        },
+        {
+            text:"",
+            options:[],
+            correctAnswerIndex:3
+        },
+        {
+            text:"",
+            options:[],
+            correctAnswerIndex:3
+        },
+        {
+            text:"",
+            options:[],
+            correctAnswerIndex:3
+        },
+        {
+            text:"",
+            options:[],
+            correctAnswerIndex:3
+        },
+        {
+            text:"",
+            options:[],
+            correctAnswerIndex:3
+        },
+        {
+            text:"",
+            options:[],
+            correctAnswerIndex:3
+        },
+        {
+            text:"",
+            options:[],
+            correctAnswerIndex:3
+        },
+    ]
+}
+
+
+module.exports = [quiz1,quiz2,quiz3,quiz4];
