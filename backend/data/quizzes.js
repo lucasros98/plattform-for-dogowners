@@ -155,49 +155,49 @@ const quiz3 = {
 
 
 const quiz4 = {
-    title:"Så sköter du din hund (Tvätt och dusch)",
-    description:"I detta quizet får du lära dig mer om hundskötsel och exempelvis mer om hundens päls och hur ofta man bör tvätta och duscha sin hund.",
+    title:"Så sköter du din hund (hundmat och foder)",
+    description:"I detta quizet får du lära dig mer om hundmat och kostvanor för hundar.",
     questions: [
         {
-            text:"",
-            options:[],
+            text:"Ungefär hur mycket av sin kroppsvikt ska en vuxen hund äta?",
+            options:["1-2%","2-3%","4-5%","7-8%"],
+            correctAnswerIndex:1
+        },
+        {
+            text:"Ungefär hur mycket av sin kroppsvikt ska en valp  äta?",
+            options:["2-3%","3-8%","5-10%","10-15%"],
+            correctAnswerIndex:2
+        },
+        {
+            text:"Hur ofta ska en vuxen hund äta?",
+            options:["1 gång per dag","2 gånger per dag","3 gånger per dag","4 gånger per dag"],
+            correctAnswerIndex:1
+        },
+        {
+            text:"Kan min hund äta för mycket mat?",
+            options:["Ja","Nej"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Vad händer om hunden äter för mycket mat?",
+            options:["Hunden kan gå upp i vikt","Hunden kan bli trött","Hunden kan gå ner i vikt"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"När brukar man byta från valp- till vuxenfoder?",
+            options:["vid 4–6 månader","vid 6–8 månader","vid 8–12 månader","över 12 månader"],
+            correctAnswerIndex:2
+        },
+        {
+            text:"Hur skiljer sig valpfoder från vuxenfoder?",
+            options:["Valpfoder innehåller mer socker","Valpfoder innehåller mer fett","Valpfoder innehåller mer kolhydrater","Valpfoder innehåller mer fett och protein"],
             correctAnswerIndex:3
         },
         {
-            text:"",
-            options:[],
-            correctAnswerIndex:3
-        },
-        {
-            text:"",
-            options:[],
-            correctAnswerIndex:3
-        },
-        {
-            text:"",
-            options:[],
-            correctAnswerIndex:3
-        },
-        {
-            text:"",
-            options:[],
-            correctAnswerIndex:3
-        },
-        {
-            text:"",
-            options:[],
-            correctAnswerIndex:3
-        },
-        {
-            text:"",
-            options:[],
-            correctAnswerIndex:3
-        },
-        {
-            text:"",
-            options:[],
-            correctAnswerIndex:3
-        },
+            text:"Varför behöver valpar ett mer energirikt foder?",
+            options:["de inte kan äta lika mycket per gång","för att de växer","för att de är trötta annars","för att de inte kan lagra energi"],
+            correctAnswerIndex:1
+        }
     ]
 }
 
