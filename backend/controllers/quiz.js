@@ -27,8 +27,29 @@ exports.getQuiz = async (req, res, next) => {
     });
 };
 
-exports.submitResults = async (req, res, next) => {
+exports.checkQuizScore = async (req, res, next) => {
     const id = req.params.id;
-    res.send("Not done")
+    const answers = req.body.answers;
+
+    if(!id || !answers) return res.send({success:false,message:"Missing parameters"})
+
+    Quiz.findById(id, (err, quiz) => {
+        if (err) {
+            console.log(err);
+            res.status(500).send({success:false,message:'An error occurred',error:err});
+        }
+        else {
+            const questions = quiz.questions
+            let correctAns = 0;
+            
+            if(answers instanceof Array && ! questions.length === answers.length) res.send({success:false,message:"Answers length don't match"})
+            
+            questions.forEach((_q,index) => {
+                if(q_.correctAnswerIndex === answers[index]) correctAns++;
+            })
+
+            return res.send({success:true,correctAnswers:correctAns})
+        }
+    });
 };
 
