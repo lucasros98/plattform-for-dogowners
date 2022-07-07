@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import "@/components/Quiz/Quiz.scss";
 import QuizOption from "@/components/Quiz/QuizOption";
 
 export default function QuizComponent ({quiz, mode}) {
@@ -27,9 +26,11 @@ export default function QuizComponent ({quiz, mode}) {
       setQuizCompleted(true);
     };
 
+    if(!quiz || !quiz.questions ) return <></>;
+
     return (
-        <div className="quiz-wrapper">
-          <h1 className={"quiz-title"}>Quiz: {quiz.title}</h1>
+        <div className="container">
+          <h1 className={"text-4xl font-bold leading-normal mt-0 mb-4"}>Quiz: {quiz.title}</h1>
           {quizCompleted && (
             <div className={"quiz-completed"}>
               <h5>
@@ -37,7 +38,7 @@ export default function QuizComponent ({quiz, mode}) {
                 {quiz.questions.length} rätt{" "} 🎉
               </h5>
               <br />
-              <div className={"answers"}>
+              <div className={"bg-white w-100"}>
                 {quiz.questions?.map((q, i) => {
                   return (
                     <div key={i} className={"answer"}>
@@ -64,12 +65,12 @@ export default function QuizComponent ({quiz, mode}) {
           )}
 
           {!quizCompleted && (
-            <div className={"question"}>
-              <div className={"question-text"}>
+            <div className={"bg-white w-100 p-4 rounded-xl"}>
+              <div className={"text-xl font-medium leading-normal mb-5"}>
                 {currentIndex + 1} / {quiz.questions.length}.{" "}
                 {quiz.questions[currentIndex]?.text}
               </div>
-              <div className={"options"}>
+              <div className={""}>
                 {quiz.questions[currentIndex]?.options.map((o, i) => {
                   return (
                       <QuizOption i={i} handleOptionSelect={handleOptionSelect} o={o}/>

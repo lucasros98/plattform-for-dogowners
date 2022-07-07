@@ -1,16 +1,19 @@
 import {useEffect,useState} from "react"
+import { useRouter } from 'next/router'
 import axios from "axios"
 import QuizComponent from "@/components/Quiz/QuizComponent"
 
-export default function Quiz({id}) {
-    const [quiz,setQuiz] = useState([])
+export default function Quiz() {
+    const [quiz,setQuiz] = useState(null)
+    const router = useRouter()
+    const { id } = router.query
 
     useEffect(() => {
-        getQuiz()
-    },[])
+        if(id) getQuiz()
+    },[id])
 
     const getQuiz = async () => {
-        let res = await axios.get("http://localhost:3000/quiz/"+id)
+        let res = await axios.get("/quizzes/"+id)
         if(res.data) setQuiz(res.data)
     }
 
@@ -18,10 +21,8 @@ export default function Quiz({id}) {
     return (<>
     <div className="bg-gray-100 h-full min-h-screen">
         <div className="container mx-auto p-5">
-            <h1 className="text-5xl font-normal leading-normal mt-0 mb-2 ">Quiz</h1>
             <div>
-                <QuizComponent quiz={quiz}/>
-
+                {quiz && <QuizComponent quiz={quiz}/>}
             </div>
         </div>
     </div>

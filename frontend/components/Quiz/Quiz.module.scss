@@ -1,4 +1,3 @@
-@import "../../styles/variables.scss";
 
 .quiz-wrapper {
   padding-bottom: 40px;
@@ -101,13 +100,13 @@
 .reset-btn {
   padding: 12px 30px;
   color: white;
-  background-color: $website-color-fade;
+  background-color: orange;
   margin-top: 20px;
   transition: 0.2s all ease;
   font-weight: 500;
 }
 .reset-btn:hover {
-  background-color: $website-color;
+  background-color: orange;
   transform: scale(1.03);
 }
 @media screen and (max-width: 800px) {

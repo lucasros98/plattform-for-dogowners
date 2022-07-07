@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from "react";
-import "./Quiz.scss";
+import "@/components/Quiz/Quiz.module.scss";
+
 
 export default function QuizOption({ i, o, handleOptionSelect }) {
   const [animate, setAnimate] = useState(false)
@@ -25,7 +26,7 @@ export default function QuizOption({ i, o, handleOptionSelect }) {
   }
 
   return (
-    <div key={i} onTouchStart={() => {return null}} className={`option ${animate && "option-animate"}`} onClick={() => handleOptionSelect(i)}>
+    <div key={i} onTouchStart={() => {return null}} className={`p-3 bg-gray-50 shadow-sm mb-2 hover:cursor-pointer hover:bg-emerald-300 rounded-lg ${animate && "option-animate"}`} onClick={() => handleOptionSelect(i)}>
       {value}
     </div>
   );
