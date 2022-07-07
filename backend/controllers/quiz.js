@@ -2,13 +2,13 @@ const Quiz = require('../models/quiz');
 const User = require('../models/user');
 
 exports.getQuizes = async (req, res, next) => {
-    Quiz.find({}, (err, quizes) => {
+    Quiz.find({},'-questions.correctAnswerIndex', (err, quizzes) => {
         if (err) {
             console.log(err);
             res.status(500).send('An error occurred', err);
         }
         else {
-            res.send( quizes );
+            res.send( quizzes );
         }
     });
 };

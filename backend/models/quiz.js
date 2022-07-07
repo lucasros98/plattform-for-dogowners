@@ -18,10 +18,10 @@ const quizSchema = new Schema({
         options: [{
             type: String,
         }],
-    }],
-    answers: [{
-        type: String
-    }],
+        correctAnswerIndex: {
+            type: Number
+        }
+    }]
 });
 
 

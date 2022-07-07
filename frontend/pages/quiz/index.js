@@ -10,9 +10,8 @@ export default function Quiz() {
     },[])
 
     const getQuizes = async () => {
-        let res = await axios.get("http://localhost:3000/quizes")
-        console.log(res)
-        if(res.data.img) setImage(res.data.img)
+        let res = await axios.get("http://localhost:3000/quizzes")
+        if(res.data) setQuizes(res.data)
     }
 
 
@@ -22,7 +21,7 @@ export default function Quiz() {
             <h1 className="text-5xl font-normal leading-normal mt-0 mb-2 ">Quiz</h1>
             <div>
                 {quizes.map((quiz) => {
-                    return <QuizCard id={quiz._id} title={quiz.title} description={quiz.description}/>
+                    return <QuizCard id={quiz._id} key={quiz._id} title={quiz.title} description={quiz.description}/>
                 })}
             </div>
         </div>

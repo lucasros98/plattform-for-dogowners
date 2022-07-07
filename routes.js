@@ -28,7 +28,7 @@ router.get('/image/:id',verifyAuth, getImage);
 router.post('/image/uploadProfile',verifyAuth, upload.single('image'), uploadProfileImage);
 
 //QUIZES
-router.get('/quizes', getQuizes); //NO AUTH
+router.get('/quizzes', getQuizes); //NO AUTH
 
 //Next pages with auth
 router.get('/profile',verifyAuth, (req,res,next) => next());
