@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import Link from "next/link"
 import DogInfo from "@/components/Profile/DogInfo"
 import NewPostModal from "@/components/Profile/NewPostModal"
 import ProfileImage from "@/components/Profile/Image"
@@ -80,10 +81,21 @@ const Profile = ({ data }) => {
                                     <span className="ml-auto">{new Date(user.created).toLocaleDateString()}</span>
                                 </li>
                             </ul>
+                            <Link href={"/settings"} className={"mt-4"}>Redigera din profil</Link>
                         </div>
                         <div className="bg-white  mt-4 p-4 rounded-lg">
                             <h1 className="text-gray-900 font-bold text-lg leading-8 my-1">Tagna quiz</h1>
-                            <p className="text-gray-700">Inga quiz tagna</p>
+                            {! user.quizTaken &&<div>
+                                <p className="text-gray-700">Inga quiz tagna</p>
+                                <Link href="/quiz"><button className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 mt-4 text-center ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Visa Quiz</button></Link>
+                            </div>}
+                            {
+                                user.quizTaken && <div>
+                                    <p className="text-gray-700">{user.quizTaken.length} quiz tagna</p>
+                                    <Link href="/quiz"><button className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 mt-4 text-center ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Gör ett nytt quiz</button></Link>
+
+                                </div>
+                            }
                         </div>
                     </div>
                     <div className="w-full  mt-4 md:w-8/12 md:mx-2 md:mt-0">
@@ -97,7 +109,7 @@ const Profile = ({ data }) => {
                                         <div className="text-gray-900 font-bold text-lg leading-8 my-1">
                                             Uppdateringar
                                         </div>
-                                        <button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={(e) => setShowPostForm(true)}>Skapa ny</button>
+                                        <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={(e) => setShowPostForm(true)}>Skapa ny</button>
                                     </div>
                                     <div className="mt-2 w-full">
                                     {false &&<ul className="list-inside space-y-2">

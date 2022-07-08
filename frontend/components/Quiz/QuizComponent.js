@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
+import axios from "axios";
 import QuizOption from "@/components/Quiz/QuizOption";
+import "./Quiz.module.scss"
 
 export default function QuizComponent ({quiz, mode}) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -16,7 +19,7 @@ export default function QuizComponent ({quiz, mode}) {
       var _answers = answers;
   
       _answers.push(optionIndex);
-      if (quiz.questions[currentIndex].answer === optionIndex) setPoints(points + 1);
+      if (quiz.questions[currentIndex].correctAnswerIndex === optionIndex) setPoints(points + 1);
     
       setAnswers(_answers);
       setCurrentIndex(currentIndex + 1);
@@ -24,6 +27,10 @@ export default function QuizComponent ({quiz, mode}) {
   
     const submitQuiz = () => {
       setQuizCompleted(true);
+      const body = {points}
+      axios.post("/quiz/submit/"+quiz._id,body).then((res) => {
+        console.log("Quiz submitted")
+      })
     };
 
     if(!quiz || !quiz.questions ) return <></>;
@@ -32,25 +39,25 @@ export default function QuizComponent ({quiz, mode}) {
         <div className="container">
           <h1 className={"text-4xl font-bold leading-normal mt-0 mb-4"}>Quiz: {quiz.title}</h1>
           {quizCompleted && (
-            <div className={"quiz-completed"}>
-              <h5>
+            <div className={"bg-white w-100 p-4 rounded-xl"}>
+              <h5 className="font-bold"> 
                 Du fick {points} /{" "}
                 {quiz.questions.length} rätt{" "} 🎉
               </h5>
               <br />
-              <div className={"bg-white w-100"}>
+              <div className={""}>
                 {quiz.questions?.map((q, i) => {
                   return (
-                    <div key={i} className={"answer"}>
+                    <div key={i} className={"p-3 bg-gray-50 shadow-sm mb-2 rounded-lg border-gray-100"}>
                       {i + 1}. {q.text}{" "}
                       <div className="option-answer-wrap">
                         {quiz.questions[i]?.options.map((o, j) => {
                           return (
-                            <div key={j} className={`option-answer ${answers[i] === j ? "chosen-answer" : ""}`}>
+                            <div key={j} className={`bg-white p-2 m-2 rounded-lg flex ${answers[i] === j ? "bg-gray-200" : ""}`}>
                               <div>{o}</div>
-                              <div>
-                                  {j === q.answer ? "✅" : ""}
-                                  {answers[i] === j && j !== q.answer ? "❌" : ""}
+                              <div className="ml-auto">
+                                  {j === q.correctAnswerIndex ? "✅" : ""}
+                                  {answers[i] === j && j !== q.correctAnswerIndex ? "❌" : ""}
                               </div>
                             </div>
                           );
@@ -60,7 +67,8 @@ export default function QuizComponent ({quiz, mode}) {
                   );
                 })}
               </div>
-              <button className="reset-btn" onClick={() => location.reload()}>Gör quizet igen ↻</button>
+              <button type="button" onClick={() => location.reload()} className="focus:outline-none text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-bold rounded-lg text-sm px-5 py-2.5 mt-5 mb-2 dark:bg-orange-600 dark:hover:bg-orange-700 dark:focus:ring-orange-900">Gör quizet igen ↻</button>
+              <Link href={"/quiz"}><button className="focus:outline-none text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:ring-orange-300 font-bold rounded-lg text-sm px-5 py-2.5 mt-5 mb-2 ml-2 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-900">Visa andra quiz</button></Link>
             </div>
           )}
 

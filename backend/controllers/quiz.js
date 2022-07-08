@@ -2,7 +2,7 @@ const Quiz = require('../models/quiz');
 const User = require('../models/user');
 
 exports.getQuizes = async (req, res, next) => {
-    Quiz.find({},'-questions.correctAnswerIndex', (err, quizzes) => {
+    Quiz.find({}, (err, quizzes) => {
         if (err) {
             console.log(err);
             res.status(500).send('An error occurred', err);
@@ -53,3 +53,20 @@ exports.checkQuizScore = async (req, res, next) => {
     });
 };
 
+exports.submitQuiz = async (req, res, next) => {
+    const id = req.params.id;
+    const userId = req.user.user._id;
+    const points = req.body.points;
+
+    if(!id || points === null) return res.send({success:false,message:"Missing parameters"})
+
+    const quizTaken = {quiz:id,points:points}
+
+    try {
+        const user = await User.findOneAndUpdate({_id:userId}, { $addToSet: { quizTaken: quizTaken } },{new: true});
+        return res.send({success:true,user:user})
+      }
+      catch(err) {
+        res.status(500).send(err)
+    }
+};

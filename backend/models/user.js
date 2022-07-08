@@ -44,7 +44,7 @@ const userSchema = new Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Quiz'
         },
-        score: {
+        points: {
             type:Number
         }
     }]
