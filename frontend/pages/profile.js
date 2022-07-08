@@ -4,6 +4,8 @@ import Link from "next/link"
 import DogInfo from "@/components/Profile/DogInfo"
 import NewPostModal from "@/components/Profile/NewPostModal"
 import ProfileImage from "@/components/Profile/Image"
+import ImagePicker from "@/components/Profile/ImagePicker"
+
 import Updates from "@/components/Profile/Updates"
 
 
