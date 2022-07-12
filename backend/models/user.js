@@ -44,7 +44,10 @@ const userSchema = new Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Quiz'
         },
-        points: {
+        bestScore: {
+            type:Number
+        },
+        timesTaken: {
             type:Number
         }
     }]

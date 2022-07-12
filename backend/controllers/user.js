@@ -86,7 +86,7 @@ exports.getUserInfo = async(req, res, next) => {
   const userId = req.user.user._id;
 
   try {
-    const user = await User.findById(userId);
+    const user = await User.findById(userId).populate("quizTaken.quiz")
     const dog = await Dog.findOne({owner:userId}).sort({ "updates.date": "asc" })
     return res.send({user,dog})
   }

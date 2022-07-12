@@ -60,13 +60,34 @@ exports.submitQuiz = async (req, res, next) => {
 
     if(!id || points === null) return res.send({success:false,message:"Missing parameters"})
 
-    const quizTaken = {quiz:id,points:points}
+    User.findById(userId).then(async function(user) {
+        if(user.quizTaken && user.quizTaken.length > 0) {
+            console.log("in if")
+            for(let i=0; i<user.quizTaken.length; i++) {
+                console.log(user.quizTaken[i])
+                if(user.quizTaken[i].quiz.equals(id)) {
+                    console.log("equals")
+                    try {
+                        user.quizTaken[i].timesTaken = user.quizTaken[i].timesTaken + 1;
+                        if(user.quizTaken[i].bestScore < points) user.quizTaken[i].bestScore = points;
+                        user.save()
+                        
+                        return res.send({success:true,user:user})
+                      }
+                      catch(err) {
+                        return res.status(500).send(err)
+                    }
+                }
+            } 
+        }
+        const quizTaken = {quiz:id,bestScore:points,timesTaken:1}
 
-    try {
-        const user = await User.findOneAndUpdate({_id:userId}, { $addToSet: { quizTaken: quizTaken } },{new: true});
-        return res.send({success:true,user:user})
-      }
-      catch(err) {
-        res.status(500).send(err)
-    }
+        const _user = await User.findOneAndUpdate({_id:userId}, { $addToSet: { quizTaken: quizTaken } },{new: true});
+        return res.send({success:true,user:_user})
+        
+        //sent respnse to client
+      }).catch(err => {
+        console.log(err)
+        console.log('Oh! Dark')
+      })
 };
