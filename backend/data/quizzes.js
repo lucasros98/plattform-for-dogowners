@@ -121,6 +121,11 @@ const quiz3 = {
             correctAnswerIndex:1
         },
         {
+            text:"När brukar en valp ha tappat sina valptänder?",
+            options:["3 mån","4 mån","6 mån","8 mån"],
+            correctAnswerIndex:2
+        },
+        {
             text:"Vilken sorts tandkräm rekommenderas ofta till hundar?",
             options:["Enzymtandkräm","Flortandkräm","Koltandkräm","Natriumtandkräm"],
             correctAnswerIndex:0
@@ -201,5 +206,110 @@ const quiz4 = {
     ]
 }
 
+const quiz5 = {
+    title:"Vad kan hundar äta och inte äta?",
+    description:"Har du koll på vad hundar inte får äta? Gör detta quizet för att lära dig mer.",
+    questions: [
+        {
+            text:"Kan hundar äta vindruvor?",
+            options:["Nej, det är giftigt","Ja det kan de"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Kan hundar äta banan?",
+            options:["Nej, det är giftigt","Ja det kan de"],
+            correctAnswerIndex:1
+        },
+        {
+            text:"Kan hundar äta choklad?",
+            options:["Nej, det är giftigt","Ja det kan de"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Kan hundar äta nötter?",
+            options:["Nej, hundar ska inte äta nötter","Ja det kan de"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Kan hundar äta jordgubbar",
+            options:["Nej, det är giftigt","Ja det kan de"],
+            correctAnswerIndex:1
+        },
+        {
+            text:"Kan hundar äta avokado?",
+            options:["Nej, det är inte bra","Ja det kan de"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Kan hundar äta lök?",
+            options:["Nej, det är giftigt","Ja det kan de"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Kan hundar äta chips",
+            options:["Nej, det är giftigt","Ja, men det är inte rekommenderat"],
+            correctAnswerIndex:1
+        },
+        {
+            text:"Kan hundar äta saffran?",
+            options:["Nej, det är giftigt","Ja det kan de"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Kan hundar äta kyckling?",
+            options:["Nej, det är giftigt","Ja det kan de"],
+            correctAnswerIndex:1
+        },
+    ]
+}
 
-module.exports = [quiz1,quiz2,quiz3,quiz4];
+const quiz6 = {
+    title:"Olika hundsjukdomar och andra hälsoproblem",
+    description:"I detta quizet får du lära dig mer om olika hundsjukdomar och hälsoproblem som du ibland kan stöta på.",
+    questions: [
+        {
+            text:"Vad kan vara tre akuta syptom på förgiftning?",
+            options:["kräkningar,diarré och hastig andning",""],
+            correctAnswerIndex:1
+        },
+        {
+            text:"Ungefär 20% av hundar kommer till veterinären av denna anledningen, vilken?",
+            options:["Hudproblem eller klåda","Ormbett","Druckit salt","Ont i ryggen"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Kan hundar bli förkylda?",
+            options:["Ja","Nej"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Kan en förkyld hund smitta människor?",
+            options:["Ja, det kan den","Nej, det kan den inte"],
+            correctAnswerIndex:1
+        },
+        {
+            text:"Vad kan vara en anledning till att hunden är stel eller hälta?",
+            options:["Förgiftning","Tränat dåligt","Valpsjuka","Atros"],
+            correctAnswerIndex:3
+        },
+        {
+            text:"Vilket ämne i choklad är det som är giftigt för hundar?",
+            options:["Xylitol","Alkohol","Teobromin","Alicin"],
+            correctAnswerIndex:2
+        },
+        {
+            text:"Vad kan vara ett tecken på öroninflammation hos hund?",
+            options:["kliar sig mycket i örat","örat är gulfärgat","örat är fuktigt","hunden ylar"],
+            correctAnswerIndex:0
+        },
+        {
+            text:"Kan byte av foder orsaka kräkningar och diarré?",
+            options:["Nej, det kan det inte","Ja, men det är inte så vanligt"],
+            correctAnswerIndex:1
+        },
+    ]
+}
+
+
+
+module.exports = [quiz1,quiz2,quiz3,quiz4,quiz5,quiz6];
