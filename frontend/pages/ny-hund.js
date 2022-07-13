@@ -32,9 +32,9 @@ export default function Login() {
 
   return (<>
     <div className="bg-gray-100 h-full min-h-screen">
-      <div className="container mx-auto">
+      <div className="container mx-auto py-12 px-6">
         <div>
-          <h2 className="mt-6 mb-4 text-3xl font-extrabold text-gray-700">Lägg till din hund</h2>
+          <h2 className="mb-6 text-3xl font-extrabold text-gray-700">Lägg till din hund</h2>
         </div>
         <form className="w-full max-w-lg" onSubmit={(e) => createDog(e)}>
           <div className="flex flex-wrap -mx-3 mb-6">
