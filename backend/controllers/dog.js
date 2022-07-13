@@ -9,8 +9,8 @@ exports.createDog = async (req, res, next) => {
     //get user id
     const owner = req.user.user._id;
     try {
-        const dog = await Dog.find({ owner });
-        if (dog) res.send("Dog already exist")
+        const dog = await Dog.findOne({ owner });
+        if (dog) return res.send({message:"Dog already exist",success:false})
 
 
         const newDog = await Dog.create({ name, breed, birth, owner });

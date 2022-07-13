@@ -3,7 +3,7 @@ import { useEffect, useState } from "react"
 import ProfileImage from "@/components/Profile/Image"
 
 export default function Settings({ data }) {
-    const [name, setName] = useState("")
+    const [username, setUserName] = useState("")
     const [email, setEmail] = useState("")
     const [bio, setBio] = useState("")
     const [image, setImage] = useState(false)
@@ -15,7 +15,7 @@ export default function Settings({ data }) {
 
             if (res.data && res.data.user) {
                 const user = res.data.user;
-                setName(user.name)
+                setUserName(user.username)
                 setEmail(user.email)
                 setBio(user.bio)
 
@@ -48,7 +48,7 @@ export default function Settings({ data }) {
         e.preventDefault()
 
         const body = {
-            name,
+            username,
             email,
             bio
         }
@@ -100,7 +100,7 @@ export default function Settings({ data }) {
                         <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                             <div>
                                 <label className=" " htmlFor="username">Namn</label>
-                                <input id="name" type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" value={name} onChange={(e) => setName(e.target.value)} />
+                                <input id="username" type="text" className="block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-300 rounded-md  focus:border-blue-500 dark:focus:border-blue-500 focus:outline-none focus:ring" value={username} onChange={(e) => setUserName(e.target.value)} />
                             </div>
 
                             <div>

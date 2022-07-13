@@ -76,7 +76,7 @@ const Profile = ({ data }) => {
                                 <ImagePicker image={image} />
 
                                 <div className="ml-4 grid content-center">
-                                    <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">{user.name ? user.name : "Namn saknas"}</h1>
+                                    <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">{user.username ? user.username : "Namn saknas"}</h1>
                                     <h3 className="text-gray-600 font-lg text-semibold leading-6">{user.email}</h3>
 
                                 </div>
@@ -119,7 +119,7 @@ const Profile = ({ data }) => {
 
                         <div className="my-4"></div>
 
-                        <div className="bg-white p-3 shadow-sm rounded-lg">
+                       {dog && <div className="bg-white p-3 shadow-sm rounded-lg">
                             <div className="w-full">
                                 <div className="flex">
                                     <div className="text-gray-900 font-bold text-lg leading-8 my-1">
@@ -135,7 +135,7 @@ const Profile = ({ data }) => {
                                 </div>
 
                             </div>
-                        </div>
+                        </div>}
                     </div>
                 </div>
             </div>

@@ -26,7 +26,7 @@ passport.use(
                 if (!user) return done(null, false);
                 const isMatch = await user.isValidPassword(password);
                 if (!isMatch)
-                    return done(null, false);
+                    return done("Passwords does not match", false);
                 // if passwords match return user
                 return done(null, user);
             } catch (error) {
