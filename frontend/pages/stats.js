@@ -22,35 +22,12 @@ const Stats = ({ data }) => {
 
     const getData = async () => {
         try {
-            let res = await axios.get("/stats")
-            console.log(res.data)
-
-            if (res.data && res.data.user) {
-                const user = res.data.user
-                const dog = res.data.dog
-                setUser(user)
-                setDog(dog)
-                setLoading(false)
-
-                if (user.profileImage) {
-                    getProfileImage(user.profileImage)
-                }
-            }
-            else {
-                //error
-                throw Error("Error")
-            }
-
+            setLoading(false)
         }
         catch (err) {
 
         }
     };
-
-    const getProfileImage = async (imageId) => {
-        let res = await axios.get("http://localhost:3000/image/" + imageId)
-        if (res.data.img) setImage(res.data.img)
-    }
 
     useEffect(() => {
         getData()

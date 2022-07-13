@@ -37,7 +37,7 @@ function Navbar() {
 							<div className="flex items-center px-4 sm:px-8 lg:px-16 xl:px-20 justify-between w-full">
 								<div className="flex justify-center items-center flex-shrink-0 ">
 									<h1 className="font-bold text-xl cursor-pointer">
-										<Link href={"/"} className="text-black">din<span className="text-orange-500">hundvalp</span></Link>
+										<Link href={"/"} className="text-black">Hund<span className="text-blue-500">valpen</span></Link>
 									</h1>
 								</div>
 								<div className="hidden md:block">

@@ -1,5 +1,5 @@
 const { createUser, loginUser,getUserInfo,logoutUser,updateUser} = require('./backend/controllers/user')
-const { createDog,getDogsByOwner,createNewUpdate,removeDogUpdate} = require('./backend/controllers/dog')
+const { createDog,getDogsByOwner,createNewUpdate,removeDogUpdate,getDogBreeds} = require('./backend/controllers/dog')
 const { getImage,uploadProfileImage} = require('./backend/controllers/image')
 const { getQuizes,getQuiz,checkQuizScore,submitQuiz} = require('./backend/controllers/quiz')
 const verifyAuth = require('./backend/authentication/auth')
@@ -19,6 +19,7 @@ router.put('/user',verifyAuth, updateUser);
 
 //DOG
 router.get('/dog',verifyAuth, getDogsByOwner);
+router.get('/dog/breeds', getDogBreeds);
 router.post('/dog/create',verifyAuth, createDog);
 router.post('/dog/update',verifyAuth, createNewUpdate);
 router.delete('/dog/update/:updateId',verifyAuth, removeDogUpdate);

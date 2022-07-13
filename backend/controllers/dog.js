@@ -1,4 +1,5 @@
 const Dog = require('../models/dog');
+const breeds = require('../data/dogbreeds')
 
 exports.createDog = async (req, res, next) => {
     const { name, breed, birth } = req.body;
@@ -10,7 +11,7 @@ exports.createDog = async (req, res, next) => {
     const owner = req.user.user._id;
     try {
         const dog = await Dog.findOne({ owner });
-        if (dog) return res.send({message:"Dog already exist",success:false})
+        if (dog) return res.send({ message: "Dog already exist", success: false })
 
 
         const newDog = await Dog.create({ name, breed, birth, owner });
@@ -26,6 +27,13 @@ exports.createDog = async (req, res, next) => {
             message: err.message,
         })
     }
+}
+
+exports.getDogBreeds = async (req, res, next) => {
+    res.json({
+        success: true,
+        breeds: breeds
+    });
 }
 
 exports.getDogsByOwner = async (req, res, next) => {
