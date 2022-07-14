@@ -20,10 +20,14 @@ export async function getServerSideProps({ req, res }) {
 
 const Profile = ({ data }) => {
     const [loading, setLoading] = useState(true)
+
     const [user, setUser] = useState(null)
     const [image, setImage] = useState(null)
 
     const [dog, setDog] = useState(null)
+    const [dogData, setDogData] = useState(null)
+
+    //Update
     const [showPostForm, setShowPostForm] = useState(false)
 
     const getData = async () => {
@@ -32,11 +36,13 @@ const Profile = ({ data }) => {
             console.log(res.data)
 
             if (res.data && res.data.user) {
-                const user = res.data.user
-                const dog = res.data.dog
+                setLoading(false)
+
+                const {user,dog,dogData} = res.data
+
                 setUser(user)
                 setDog(dog)
-                setLoading(false)
+                setDogData(dogData)
 
                 if (user.profileImage) {
                     getProfileImage(user.profileImage)
@@ -115,7 +121,7 @@ const Profile = ({ data }) => {
                         </div>
                     </div>
                     <div className="w-full  mt-4 md:w-8/12 md:mx-2 md:mt-0">
-                        <DogInfo dog={dog} />
+                        <DogInfo dog={dog} dogData={dogData} />
 
                         <div className="my-4"></div>
 

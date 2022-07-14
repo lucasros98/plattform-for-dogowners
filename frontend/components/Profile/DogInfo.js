@@ -2,8 +2,9 @@ import "moment"
 import Link from "next/link"
 import moment from "moment"
 import Dropdown from "../Buttons/Dropdown";
+import Motion from "../Tips/Motion";
 
-export default function DogInfo({ dog }) {
+export default function DogInfo({ dog,dogData }) {
 
     //get first dog in array
 
@@ -39,7 +40,7 @@ export default function DogInfo({ dog }) {
                     </div>
                     <div className="grid grid-cols-2">
                         <div className="px-4 py-2 font-semibold">Ålder</div>
-                        <div className="px-4 py-2">{dog.birth ? moment(new Date(dog.birth)).fromNow() : "Saknas"}</div>
+                        <div className="px-4 py-2">{dog.birth ? moment(new Date(dog.birth)).fromNow(true) : "Saknas"}</div>
                     </div>
 
                 </div> : <div>
@@ -47,7 +48,12 @@ export default function DogInfo({ dog }) {
                     <Link href="/ny-hund">Lägg till din hund</Link>
                 </div>}
             </div>
+            <hr className="my-3 mx-3"/>
+            <div className="p-3">
+                <h3></h3>
+            <Motion dog={dog} dogData={dogData}/>
 
+            </div>
         </div>
     );
 }

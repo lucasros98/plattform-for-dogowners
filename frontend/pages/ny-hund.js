@@ -42,7 +42,7 @@ export default function Login() {
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Namn
               </label>
-              <input  type="text" value={name} class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " onChange={(e) => setName(e.target.value)} placeholder="Gizmo" />
+              <input  type="text" value={name} class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-6 p-2.5 " onChange={(e) => setName(e.target.value)} placeholder="Gizmo" />
 
             </div>
           </div>
@@ -51,7 +51,7 @@ export default function Login() {
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Ras
               </label>
-              <input  type="text" value={breed} class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " onChange={(e) => setBreed(e.target.value)} placeholder="Golden retriever" />
+              <input  type="text" value={breed} class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-6 p-2.5 " onChange={(e) => setBreed(e.target.value)} placeholder="Golden retriever" />
             </div>
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
@@ -61,7 +61,7 @@ export default function Login() {
                 Födelsdatum
               </label>
               <div class="relative">
-                <input datepicker type="date" value={birth} class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-10 p-2.5 " onChange={(e) => setBirth(e.target.value)} placeholder="Datum" />
+                <input type="date" value={birth} class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-6 p-2.5 " onChange={(e) => setBirth(e.target.value)} placeholder="Datum" />
               </div>            
               </div>
           </div>

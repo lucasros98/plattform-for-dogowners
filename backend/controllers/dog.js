@@ -1,5 +1,7 @@
 const Dog = require('../models/dog');
 const breeds = require('../data/dogbreeds')
+const motion = require('../data/motion')
+
 
 exports.createDog = async (req, res, next) => {
     const { name, breed, birth } = req.body;
@@ -60,6 +62,13 @@ exports.getDogBreeds = async (req, res, next) => {
     res.json({
         success: true,
         breeds: breeds
+    });
+}
+
+exports.getDogMotion = async (req, res, next) => {
+    res.json({
+        success: true,
+        motion: motion
     });
 }
 

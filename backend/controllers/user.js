@@ -4,6 +4,8 @@ const passport = require('passport')
 const jwt = require('jsonwebtoken');
 const {validateEmail} = require('../utils/validation')
 
+//Dog data
+const motion = require('../data/motion')
 
 exports.createUser = async (req, res, next) => {
   const { email, password } = req.body;
@@ -88,7 +90,10 @@ exports.getUserInfo = async(req, res, next) => {
   try {
     const user = await User.findById(userId).populate("quizTaken.quiz")
     const dog = await Dog.findOne({owner:userId}).sort({ "updates.date": "asc" })
-    return res.send({user,dog})
+
+    const dogData = {motion}
+
+    return res.send({user,dog,dogData})
   }
   catch(err) {
     res.status(500).send(err)
