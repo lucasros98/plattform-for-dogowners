@@ -1,15 +1,29 @@
 import "moment"
 import axios from "axios"
 import Dropdown from "../Buttons/Dropdown"
+import Swal from 'sweetalert2'
 
 export default function DogUpdate({ user, data,updateDog }) {
 
     function removeUpdate() {
-        axios.delete(("/dog/update/"+data._id)).then((res)=> {
-            if(res.data.success) {
-                updateDog(res.data.dog)
-            }
-        })
+        Swal.fire({
+            title: 'Vill du ta bort uppdateringen?',
+            text: 'Är du säker på att du vill ta bort denna uppdateringen för din hund?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33', 
+            cancelButtonText:'Stäng',
+            confirmButtonText: 'Ja'
+         }).then((result) => {
+            if(result.value){
+                axios.delete(("/dog/update/"+data._id)).then((res)=> {
+                    if(res.data.success) {
+                        updateDog(res.data.dog)
+                    }
+                })
+           }
+         })
     }
 
     return (

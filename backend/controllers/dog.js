@@ -29,6 +29,33 @@ exports.createDog = async (req, res, next) => {
     }
 }
 
+
+exports.editDog = async (req, res, next) => {
+    const { name, breed, birth } = req.body;
+    if (!name || name.length == 0) {
+        return res.status(200).send("A name is requirted");
+
+    }
+    //get user id
+    const id = req.params.id;
+    const owner = req.user.user._id;
+    try {
+        const dog = await Dog.findOneAndUpdate({ _id:id,owner:owner },{name,breed,birth},{new:true});
+
+        res.json({
+            success: true,
+            message: 'Dog updated',
+            dog: dog
+        });
+    }
+    catch (err) {
+        res.status(500).json({
+            success: false,
+            message: err.message,
+        })
+    }
+}
+
 exports.getDogBreeds = async (req, res, next) => {
     res.json({
         success: true,

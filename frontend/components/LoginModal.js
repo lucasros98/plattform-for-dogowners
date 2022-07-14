@@ -3,7 +3,7 @@ import router from 'next/router'
 import { useEffect, useState } from "react";
 import axios from "axios"
 import endpoints from "../data/userEndpoints"
-
+import Swal from 'sweetalert2'
 
 export default function LoginModal({ visible, setVisible }) {
     const [show, setShow] = useState(false)
@@ -23,15 +23,13 @@ export default function LoginModal({ visible, setVisible }) {
     function loginUser(e) {
         e.preventDefault()
 
-        close()
-
         const data = {
             email, password
         }
 
         axios.post(endpoints.login, data).then((res) => {
             if (res.data.success) {
-
+                close()
                 const user = res.data.user;
 
                 if (typeof window !== "undefined") {
@@ -42,10 +40,20 @@ export default function LoginModal({ visible, setVisible }) {
             }
 
             else {
-                alert("Failed")
+                Swal.fire({
+                    title: 'Misslyckades',
+                    text: 'Kunde inte logga in på kontot. Angav du korrekta uppgifter?',
+                    icon: 'error',
+                    confirmButtonText: 'Stäng'
+                })
             }
         }).catch((err) => {
-            console.log(err.message)
+            Swal.fire({
+                title: 'Misslyckades',
+                text: 'Kontrollera att du angav rätt email och lösenord.',
+                icon: 'error',
+                confirmButtonText: 'Stäng'
+            })
         })
     }
 

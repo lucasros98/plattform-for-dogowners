@@ -1,13 +1,14 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import ProfileImage from "@/components/Profile/Image"
+import Swal from 'sweetalert2'
 
 export default function Settings({ data }) {
     const [username, setUserName] = useState("")
     const [email, setEmail] = useState("")
     const [bio, setBio] = useState("")
     const [image, setImage] = useState(false)
-    const [preview,setPreview] = useState(false)
+    const [preview, setPreview] = useState(false)
 
     const getData = async () => {
         try {
@@ -19,7 +20,7 @@ export default function Settings({ data }) {
                 setEmail(user.email)
                 setBio(user.bio)
 
-                if(user.profileImage) {
+                if (user.profileImage) {
                     getProfileImage(user.profileImage)
                 }
             }
@@ -35,7 +36,7 @@ export default function Settings({ data }) {
     };
 
     const getProfileImage = async (imageId) => {
-        let res = await axios.get("http://localhost:3000/image/"+imageId)
+        let res = await axios.get("http://localhost:3000/image/" + imageId)
         if (res.data.img) setPreview(res.data.img)
     }
 
@@ -52,9 +53,14 @@ export default function Settings({ data }) {
             email,
             bio
         }
-        axios.put("/user",body).then((res) => {
-            console.log(res)
-        }) 
+        axios.put("/user", body).then((res) => {
+            Swal.fire({
+                title: 'Lyckades!',
+                text: 'Du har ändrat inställningarna för ditt konto.',
+                icon: 'success',
+                confirmButtonText: 'Stäng'
+            })
+        })
     }
 
     function updateUserImage(e) {
@@ -63,11 +69,18 @@ export default function Settings({ data }) {
         const data = new FormData();
         data.append("image", image)
 
-        axios.post("/image/uploadProfile",data,{headers: {
-            'Content-Type': 'multipart/form-data'
-          }}).then((res)=> {
-            console.log(res)
-          })
+        axios.post("/image/uploadProfile", data, {
+            headers: {
+                'Content-Type': 'multipart/form-data'
+            }
+        }).then((res) => {
+            Swal.fire({
+                title: 'Lyckades!',
+                text: 'Du har ändrat profilbilden för ditt konto.',
+                icon: 'success',
+                confirmButtonText: 'Stäng'
+            })
+        })
     }
 
 
@@ -78,16 +91,19 @@ export default function Settings({ data }) {
             'image/jpeg',
             'image/jpg',
         ]
-        if(whitelist.includes(file.type)) {
+        if (whitelist.includes(file.type)) {
             const img = URL.createObjectURL(file)
             setPreview(img)
             setImage(file)
         }
         else {
-            alert("File type not allowed")
+            Swal.fire({
+                title: 'Ett fel uppstod',
+                text: 'Filtypen som du laddade upp är inte accepterad!',
+                icon: 'error',
+                confirmButtonText: 'Stäng'
+            })
         }
-
-        //save user
     }
 
 
@@ -136,7 +152,7 @@ export default function Settings({ data }) {
                                         <div className="flex text-sm text-gray-600">
                                             <label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
                                                 <span className="">Upload a file</span>
-                                                <input id="file-upload" name="file-upload" type="file" className="sr-only"  onChange={(e) => validateFile(e.target.files[0])} />
+                                                <input id="file-upload" name="file-upload" type="file" className="sr-only" onChange={(e) => validateFile(e.target.files[0])} />
                                             </label>
                                             <p className="pl-1 ">or drag and drop</p>
                                         </div>
@@ -148,7 +164,7 @@ export default function Settings({ data }) {
                             </div>
                             <div className="mt-1">
                                 {!preview && <div>Ingen profilbild har blivit vald</div>}
-                                {preview && <ProfileImage image={preview}/>}
+                                {preview && <ProfileImage image={preview} />}
                             </div>
                         </div>
                         <div className="mt-4">

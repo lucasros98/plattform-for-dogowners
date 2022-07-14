@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import Swal from 'sweetalert2'
 
 export default function ImagePicker({ image }) {
     const [upload, setUpload] = useState(false)
@@ -17,7 +18,12 @@ export default function ImagePicker({ image }) {
                 'Content-Type': 'multipart/form-data'
             }
         }).then((res) => {
-            console.log(res)
+            Swal.fire({
+                title: 'Lyckades!',
+                text: 'Du har ändrat profilbilden för ditt konto.',
+                icon: 'success',
+                confirmButtonText: 'Stäng'
+              })
         })
     }
 
@@ -36,10 +42,13 @@ export default function ImagePicker({ image }) {
             updateUserImage(file)
         }
         else {
-            alert("File type not allowed")
+            Swal.fire({
+                title: 'Ett fel uppstod',
+                text: 'Filtypen som du laddade upp är inte accepterad!',
+                icon: 'error',
+                confirmButtonText: 'Stäng'
+              })
         }
-
-        //save user
     }
     if (!image) return <Image image={"/static/profilePicture.png"} validateFile={validateFile} />
     else if (preview)

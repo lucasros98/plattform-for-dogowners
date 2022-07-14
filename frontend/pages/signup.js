@@ -2,6 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 import endpoints from "../data/userEndpoints"
 import router from 'next/router'
+import Swal from 'sweetalert2'
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -22,16 +23,32 @@ export default function Login() {
 
     axios.post(endpoints.signup, data).then((res) => {
       if (res.data.success) {
-        alert(res.data.message)
-
-        //redirect to login
+        Swal.fire({
+          title: 'Konto skapat!',
+          text: 'Du har skapat din konto, nu är det bara att logga in!',
+          icon: 'success',
+          confirmButtonText: 'Logga in'
+      }).then(()=> {
         router.push('/login')
+
+      })
+  
       }
       else {
-        alert("Failed")
+        Swal.fire({
+          title: 'Misslyckades',
+          text: 'Ett fel uppstod när du försöka skapa kontot.',
+          icon: 'error',
+          confirmButtonText: 'Försök igen'
+      })
       }
     }).catch((err) => {
-      console.log(err.message)
+      Swal.fire({
+        title: 'Misslyckades',
+        text: 'Kontrollera att du angav rätt email och lösenord.',
+        icon: 'error',
+        confirmButtonText: 'Försök igen'
+    })
     })
   }
 

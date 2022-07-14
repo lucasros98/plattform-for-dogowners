@@ -1,16 +1,27 @@
 import "moment"
 import Link from "next/link"
 import moment from "moment"
+import Dropdown from "../Buttons/Dropdown";
 
-export default function DogInfo({ dog}) {
+export default function DogInfo({ dog }) {
 
     //get first dog in array
-    
+
 
     return (
         <div className="bg-white p-3 shadow-sm rounded-lg">
-            <div className="ml-4  text-gray-900 font-bold text-lg leading-8 my-1">
-                Min hund
+            <div className="flex">
+                <div className="ml-4 text-gray-900 font-bold text-lg leading-8 my-1">
+                    Min hund
+                </div>
+                <div className="ml-auto mr-4 my-1">
+
+                    <Dropdown>
+                        <Link href={"/dog/edit"}>
+                            <button className="w-full text-gray-700 block px-4 py-2 text-sm text-start hover:bg-gray-100">Ändra</button>
+                        </Link>
+                    </Dropdown>
+                </div>
             </div>
             <div className="text-gray-700">
                 {dog ? <div className="grid md:grid-cols-2 text-sm">
@@ -31,10 +42,10 @@ export default function DogInfo({ dog}) {
                         <div className="px-4 py-2">{dog.birth ? moment(new Date(dog.birth)).fromNow() : "Saknas"}</div>
                     </div>
 
-                </div>: <div>
+                </div> : <div>
                     <p>Ingen hund</p>
-                    <Link  href="/ny-hund">Lägg till din hund</Link>
-                    </div>}
+                    <Link href="/ny-hund">Lägg till din hund</Link>
+                </div>}
             </div>
 
         </div>

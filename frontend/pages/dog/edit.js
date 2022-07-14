@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import axios from "axios"
 import router from 'next/router'
 import moment from "moment"
-
+import Swal from 'sweetalert2'
 
 export default function EditDog() {
     const [dog, setDog] = useState(null)
@@ -25,7 +25,14 @@ export default function EditDog() {
 
         axios.post("/dog/edit/" + dog._id, body).then((res) => {
             if (res.data.success) {
-                router.push('/profile', undefined, { shallow: true })
+                Swal.fire({
+                    title: 'Redigerad',
+                    text: 'Du har ändrat datan för din hund.',
+                    icon: 'success',
+                    confirmButtonText: 'Till profil'
+                  }).then(() => {
+                    router.push('/profile', undefined, { shallow: true })
+                  })
             }
             else {
                 throw Error("error")

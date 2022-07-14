@@ -2,7 +2,7 @@ import { useState } from "react"
 import axios from "axios"
 import endpoints from "@/data/userEndpoints"
 import router from 'next/router'
-
+import Swal from 'sweetalert2'
 
 export default function Login() {
   const [email, setEmail] = useState("")
@@ -28,12 +28,21 @@ export default function Login() {
         //redirect to login
         router.push('/profile', undefined, { shallow: true })
       }
-
       else {
-        alert("Failed")
+        Swal.fire({
+          title: 'Misslyckades',
+          text: 'Kontrollera att du angav rätt email och lösenord.',
+          icon: 'error',
+          confirmButtonText: 'Stäng'
+      })
       }
     }).catch((err) => {
-      console.log(err.message)
+      Swal.fire({
+        title: 'Misslyckades',
+        text: 'Kontrollera att du angav rätt email och lösenord.',
+        icon: 'error',
+        confirmButtonText: 'Stäng'
+    })
     })
   }
 
