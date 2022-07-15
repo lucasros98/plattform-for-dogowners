@@ -44,6 +44,7 @@ router.post('/quiz/submit/:id',verifyAuth, submitQuiz); //NO AUTH
 
 //Next pages with auth
 router.get('/profile',verifyAuth, (req,res,next) => next());
+router.get('/stats',verifyAuth, (req,res,next) => next());
 router.get('/ny-hund',verifyAuth, (req,res,next) => next());
 router.get('/dog/edit',verifyAuth, (req,res,next) => next());
 router.get('/settings',verifyAuth, (req,res,next) => next());
