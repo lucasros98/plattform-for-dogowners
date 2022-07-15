@@ -21,6 +21,9 @@ export default function DogInfo({ dog,dogData }) {
                         <Link href={"/dog/edit"}>
                             <button className="w-full text-gray-700 block px-4 py-2 text-sm text-start hover:bg-gray-100">Ändra</button>
                         </Link>
+                        <Link href={"/stats"}>
+                            <button className="w-full text-gray-700 block px-4 py-2 text-sm text-start hover:bg-gray-100">Se utvecklingen</button>
+                        </Link>
                     </Dropdown>
                 </div>
             </div>
