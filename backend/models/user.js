@@ -56,14 +56,18 @@ const userSchema = new Schema({
 
 //hash password
 userSchema.pre('save', async function(next) {
+    console.log("pre safe")
     const user = this;
-    const hash = await bcrypt.hash(user.password, 10);
+    const salt = await bcrypt.genSalt(10)
+    user.salt = salt;
 
+    const hash = await bcrypt.hash(user.password, salt);
     user.password = hash;
     next();   
 });
 
 userSchema.methods.isValidPassword = async function(password) {
+    console.log("checking passwords")
     const user = this;
     const compare = await bcrypt.compare(password, user.password);
 

@@ -2,30 +2,19 @@ import { useEffect, useState } from "react";
 import { Transition } from "@headlessui/react";
 import headerNavLinks from '@/data/headerNavLinks'
 import Link from './Link'
-import Cookies from 'universal-cookie';
 import LoginModal from "./LoginModal";
-
+import { useAppContext } from '../contexts/AppContext';
 
 function Navbar() {
-	const cookies = new Cookies();
 	const [isOpen, setIsOpen] = useState(false);
 	const [login,setLogin] = useState(false)
 	const [loggedIn,setLoggedIn] = useState(false)
 
-	useEffect(() => {
-		if (typeof window !== "undefined") {
-			try {
-				let user = sessionStorage.getItem("user")
-				if (user) setLoggedIn(true)
-				console.log(user)
-			}
-			catch(err) {
-					
-			}
-		}
-	},[])
+	const context = useAppContext();
 
-
+	useEffect(()=> {
+		if(context.user) setLoggedIn(true)
+	},[context])
 
 	return (
 		<>

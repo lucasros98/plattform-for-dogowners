@@ -4,11 +4,13 @@ import { useEffect, useState } from "react";
 import axios from "axios"
 import endpoints from "../data/userEndpoints"
 import Swal from 'sweetalert2'
+import { useAppContext } from '../contexts/AppContext';
 
 export default function LoginModal({ visible, setVisible }) {
     const [show, setShow] = useState(false)
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const context = useAppContext();
 
     useEffect(() => {
         if (visible) setShow(true)
@@ -31,10 +33,8 @@ export default function LoginModal({ visible, setVisible }) {
             if (res.data.success) {
                 close()
                 const user = res.data.user;
-
-                if (typeof window !== "undefined") {
-                    sessionStorage.setItem("user", JSON.stringify(user))
-                }
+                context.setUser(user)
+                
                 //redirect to login
                 router.push('/profile', undefined, { shallow: true })
             }

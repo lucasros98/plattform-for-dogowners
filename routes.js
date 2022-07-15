@@ -11,7 +11,7 @@ const router = express.Router();
 /**  These routes need no auth */
 router.post('/signup', createUser);
 router.post('/login', loginUser);
-router.post('/logout', logoutUser);
+router.get('/logout', logoutUser);
 
 //USER
 router.get('/user',verifyAuth, getUserInfo);

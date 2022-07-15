@@ -32,7 +32,7 @@ const Profile = ({ data }) => {
 
     const getData = async () => {
         try {
-            let res = await axios.get("http://localhost:3000/user")
+            let res = await axios.get("/user")
             console.log(res.data)
 
             if (res.data && res.data.user) {
