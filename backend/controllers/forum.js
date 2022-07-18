@@ -1,5 +1,5 @@
-const ForumPost = require('../models/forum');
-const ForumComment = require('../models/comment');
+const ForumPost = require('../models/forumPost');
+const ForumComment = require('../models/forumComment');
 
 
 exports.createPost = async (req, res, next) => {

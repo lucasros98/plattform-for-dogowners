@@ -1,5 +1,7 @@
 const { createUser, loginUser,getUserInfo,logoutUser,updateUser} = require('./backend/controllers/user')
 const { createDog,getDogsByOwner,createNewUpdate,removeDogUpdate,getDogBreeds,getDogMotion,editDog} = require('./backend/controllers/dog')
+const { getPosts, getSpecificPost,createPost,addComment } = require('./backend/controllers/forum')
+
 const { getImage,uploadProfileImage} = require('./backend/controllers/image')
 const { getQuizes,getQuiz,checkQuizScore,submitQuiz} = require('./backend/controllers/quiz')
 const verifyAuth = require('./backend/authentication/auth')
@@ -38,8 +40,13 @@ router.post('/image/uploadProfile',verifyAuth, upload.single('image'), uploadPro
 router.get('/quizzes', getQuizes); //NO AUTH
 router.get('/quizzes/:id', getQuiz); //NO AUTH
 router.post('/quiz/score/:id', checkQuizScore); //NO AUTH
-router.post('/quiz/submit/:id',verifyAuth, submitQuiz); //NO AUTH
+router.post('/quiz/submit/:id',verifyAuth, submitQuiz);
 
+//FORUM
+router.get('/posts', getPosts); //NO AUTH
+router.get('/post/:id', getSpecificPost); //NO AUTH
+router.post('/post',verifyAuth, createPost);
+router.post('/comment/:id',verifyAuth, addComment);
 
 
 //Next pages with auth
