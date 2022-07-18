@@ -1,4 +1,6 @@
 const ForumPost = require('../models/forum');
+const ForumComment = require('../models/comment');
+
 
 exports.createPost = async (req, res, next) => {
     const { title, body, category } = req.body;
@@ -92,13 +94,54 @@ exports.addComment = async (req, res, next) => {
 }
 
 exports.deletePost = async (req, res, next) => {
+    const id = req.params.id;
+    const author = req.user.user._id;
+    const post = await ForumPost.findById(id);
 
+    if (!post) return res.send({ message: "Could not find post", success: false })
+    else if(author.toString() === post.author.toString()) {
+        //user is owner of the post
+        await post.remove()
+        res.send({message:"Removed",success:true})
+    }
+    else {
+        res.send({ message: "Could not remove post, you need to be the owner.", success: false })
+    }
 }
 
-exports.editComment = async (req, res, next) => {
+exports.hideComment = async (req, res, next) => {
+    const id = req.params.id;
+    const author = req.user.user._id;
+    const comment = await ForumComment.findById(id);
 
+    if (!comment) return res.send({ message: "Could not find comment", success: false })
+    else if(author.toString() === comment.author.toString()) {
+        //user is owner of the comment
+        const updateFields = {hidden:true,body:""}
+
+        const updated = await ForumComment.findOneAndUpdate({_id:id},updateFields,{new: true})
+        res.send({message:"Updated",comment:updated,success:true})
+    }
+    else {
+        res.send({ message: "Could not edit comment, you need to be the owner.", success: false })
+    }
 }
 
 exports.editPost = async (req, res, next) => {
+    const id = req.params.id;
+    const author = req.user.user._id;
+    const {body} = req.body
+    const post = await ForumPost.findById(id);
 
+    if (!post) return res.send({ message: "Could not find post", success: false })
+    else if(author.toString() === post.author.toString()) {
+        //user is owner of the post
+        const updateFields = {body:body,edited:true}
+
+        const updated = await ForumPost.findOneAndUpdate({_id:id},updateFields,{new: true})
+        res.send({message:"Updated",post:updated,success:true})
+    }
+    else {
+        res.send({ message: "Could not edit post, you need to be the owner.", success: false })
+    }
 }

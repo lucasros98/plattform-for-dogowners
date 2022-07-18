@@ -35,7 +35,16 @@ const postSchema = new Schema({
             type: mongoose.Schema.Types.ObjectId,
             ref: 'Comment',
         }
-    ]
+    ],
+    edited: {
+        type:Boolean,
+        default:false
+    }
+});
+
+postSchema.pre('remove', function(callback) {
+    // Remove all the comments here
+   // this.model('comments').remove({ _id: this._id }, callback);
 });
 
 
