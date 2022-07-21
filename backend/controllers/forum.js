@@ -3,6 +3,7 @@ const ForumComment = require('../models/forumComment');
 
 
 exports.createPost = async (req, res, next) => {
+    console.log(req.body)
     const { title, body, category } = req.body;
     if (!title || title.length == 0) {
         return res.status(200).send("A title is required.");
@@ -36,7 +37,7 @@ exports.getPosts = async (req, res, next) => {
     let search = {}
 
     //add search query params
-    if (category || category.length > 0) search.category = category;
+    if (category && category.length > 0) search.category = category;
 
     const posts = await ForumPost.find(search);
 
