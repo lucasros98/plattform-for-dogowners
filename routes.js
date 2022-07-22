@@ -1,6 +1,6 @@
 const { createUser, loginUser,getUserInfo,logoutUser,updateUser} = require('./backend/controllers/user')
 const { createDog,getDogsByOwner,createNewUpdate,removeDogUpdate,getDogBreeds,getDogMotion,editDog} = require('./backend/controllers/dog')
-const { getPosts, getSpecificPost,createPost,addComment } = require('./backend/controllers/forum')
+const { getPosts, getSpecificPost,createPost,addComment,deletePost } = require('./backend/controllers/forum')
 
 const { getImage,uploadProfileImage} = require('./backend/controllers/image')
 const { getQuizes,getQuiz,checkQuizScore,submitQuiz} = require('./backend/controllers/quiz')
@@ -47,6 +47,8 @@ router.get('/posts', getPosts); //NO AUTH
 router.get('/post/:id', getSpecificPost); //NO AUTH
 router.post('/post',verifyAuth, createPost);
 router.post('/comment/:id',verifyAuth, addComment);
+router.delete('/post/:id',verifyAuth, deletePost);
+
 
 
 //Next pages with auth

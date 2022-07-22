@@ -42,11 +42,5 @@ const postSchema = new Schema({
     }
 });
 
-postSchema.pre('remove', function(callback) {
-    // Remove all the comments here
-   // this.model('comments').remove({ _id: this._id }, callback);
-});
-
-
 module.exports = mongoose.model('ForumPost', postSchema);
 

@@ -83,7 +83,7 @@ exports.addComment = async (req, res, next) => {
 
     try {
         const comment = await ForumComment.create(newComment)
-        const post = await ForumPost.findOneAndUpdate({ _id:id }, { $addToSet: { comments: comment._id } }, { new: true }).populate("comments").sort({ "updates.date": "desc" });
+        const post = await ForumPost.findOneAndUpdate({ _id:id }, { $addToSet: { comments: comment._id } }, { new: true }).populate({path:"author comments",populate: {path:"author",select:"username",strictPopulate:false}})
         return res.send({ success: true, post: post })
     }
     catch (err) {
@@ -96,12 +96,18 @@ exports.addComment = async (req, res, next) => {
 }
 
 exports.deletePost = async (req, res, next) => {
+    console.log("in delete")
     const id = req.params.id;
     const author = req.user.user._id;
     const post = await ForumPost.findById(id);
 
     if (!post) return res.send({ message: "Could not find post", success: false })
     else if(author.toString() === post.author.toString()) {
+        console.log("in else")
+
+        //remove comments
+        await ForumComment.remove({ "_id": { "$in": post.comments } })
+
         //user is owner of the post
         await post.remove()
         res.send({message:"Removed",success:true})

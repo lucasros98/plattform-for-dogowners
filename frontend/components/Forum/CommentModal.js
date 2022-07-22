@@ -12,6 +12,7 @@ export default function CommentModal({ visible, setVisible, updatePost,id}) {
     }, [visible])
 
     function close() {
+        setText("")
         setShow(false)
         setVisible(false)
     }
@@ -24,6 +25,7 @@ export default function CommentModal({ visible, setVisible, updatePost,id}) {
         axios.post("/comment/"+id,bodyData).then((res)=> {
             if(res.data.success) {
                 close()
+                updatePost(res.data.post)
             }
             else {
               throw Error("error")
