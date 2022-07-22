@@ -49,7 +49,7 @@ export default function post() {
                     </div>
                     <div className="grid gap-4">
                     {post.comments.map((c) => {
-                        return <Comment key={c._id} body={c.body} date={c.date} author={c.author}/>
+                        return <Comment key={c._id} body={c.body} date={c.date} author={c.author ? c.author.username: "Saknas"}/>
                     })}
                     </div>
                 </div>

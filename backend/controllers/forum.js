@@ -57,7 +57,7 @@ exports.getSpecificPost = async (req, res, next) => {
             post: null
         });
     }
-    let post = await ForumPost.findById(id).populate("comments author","body date author username")
+    let post = await ForumPost.findById(id).populate({path:"author comments",populate: {path:"author",select:"username",strictPopulate:false}})
     res.json({
         success: true,
         message: 'Success!',
