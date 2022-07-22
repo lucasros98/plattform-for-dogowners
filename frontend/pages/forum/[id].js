@@ -36,19 +36,22 @@ export default function post() {
         <CommentModal visible={commentModal} setVisible={setCommentModal} updatePost={setPost} id={id} />
 
             <div className="container mx-auto p-5 mb-3">
-                <div className="bg-white width-full p-6 rounded-lg">
-                    <h1 className="mb-6 text-3xl font-extrabold text-gray-700 rounded-lg">{post.title}</h1>
-                    <div className="bg-gray-50 p-4">{post.body}</div>
+                <div className="bg-white width-full p-6 rounded-lg shadow-sm">
+                    <h1 className="mb-2 text-3xl font-extrabold text-gray-700 rounded-lg">{post.title}</h1>
+                    <small className="mb-4">Publicerad av  {post.author.username},  {new Date(post.created).toLocaleString()}</small>
+                    <div className="bg-gray-50 p-4 mt-4 shadow-sm rounded-lg border border-gray-100">{post.body}</div>
                 </div>
                
-                <div className="bg-white width-full p-6 rounded-lg mt-3">
+                <div className="bg-white width-full p-6 rounded-lg mt-3 shadow-sm">
                     <div className="flex mb-6 ">    
-                     <h1 className="text-xl font-extrabold text-gray-700 rounded-lg">Kommentarer</h1>
-                      <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => setCommentModal(true)}>Skriv en kommentar</button>
+                     <h1 className="text-xl font-extrabold text-gray-700 rounded-lg">Kommentarer ({post.comments.length} st)</h1>
+                      {loggedIn && <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => setCommentModal(true)}>Skriv en kommentar</button>}
                     </div>
+                    <div className="grid gap-4">
                     {post.comments.map((c) => {
                         return <Comment key={c._id} body={c.body} date={c.date} author={c.author}/>
                     })}
+                    </div>
                 </div>
             </div>
         </div>}

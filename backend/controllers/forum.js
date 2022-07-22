@@ -57,7 +57,7 @@ exports.getSpecificPost = async (req, res, next) => {
             post: null
         });
     }
-    const post = await ForumPost.findById(id);
+    let post = await ForumPost.findById(id).populate("comments author","body date author username")
     res.json({
         success: true,
         message: 'Success!',
@@ -79,10 +79,11 @@ exports.addComment = async (req, res, next) => {
 
     if (!body) return res.status(400).send("Text is required")
 
-    const comment = {body,author}
+    const newComment = {body,author}
 
     try {
-        const post = await ForumPost.findOneAndUpdate({ _id:id }, { $addToSet: { comments: comment } }, { new: true }).sort({ "updates.date": "desc" });
+        const comment = await ForumComment.create(newComment)
+        const post = await ForumPost.findOneAndUpdate({ _id:id }, { $addToSet: { comments: comment._id } }, { new: true }).populate("comments").sort({ "updates.date": "desc" });
         return res.send({ success: true, post: post })
     }
     catch (err) {
