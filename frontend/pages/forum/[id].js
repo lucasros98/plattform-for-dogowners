@@ -55,10 +55,34 @@ export default function post() {
                     })
                 }
            }
-         })
+         })  
+    }
 
-
-       
+    async function hideComment(id) {
+        Swal.fire({
+            title: 'Vill du ta bort din kommentar?',
+            text: 'Är du säker på att du vill ta bort din kommentar?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33', 
+            cancelButtonText:'Stäng',
+            confirmButtonText: 'Ja'
+         }).then(async(result) => {
+            if(result.value){
+                let res = await axios.delete("/comment/" + id)
+                if (res.data.success) {
+                    Swal.fire({
+                        title: 'Lyckades!',
+                        text: 'Din kommentar har gömts.',
+                        icon: 'success',
+                        confirmButtonText: 'Stäng'
+                    }).then(() => {
+                        router.reload()
+                    })
+                }
+           }
+         })  
     }
 
 
@@ -90,7 +114,7 @@ export default function post() {
                     </div>
                     <div className="grid gap-4">
                         {post.comments.map((c) => {
-                            return <Comment key={c._id} body={c.body} date={c.date} author={c.author ? c.author.username : "Saknas"} />
+                            return <Comment key={c._id} id={c._id} body={c.body} hidden={c.hidden} date={c.date} isOwner={loggedIn && context.user._id === c.author._id} author={c.author ? c.author.username : "Saknas"} hideComment={hideComment}/>
                         })}
                     </div>
                 </div>
