@@ -140,7 +140,7 @@ export default function Settings({ data }) {
 
     return (
         <>
-            <div className="min-h-screen pt-2">
+            <div className="min-h-screen pt-2 mb-10">
                 <div className="container mx-auto mt-6 max-w-4xl">
                     <h1 className="text-xl font-bold  capitalize ">Inställningar</h1>
                     <form onSubmit={(e) => saveUser(e)}>
@@ -204,8 +204,8 @@ export default function Settings({ data }) {
                     </form>
                     <hr className="border border-gray-100 my-3"/>
                     <h2 className="text-xl font-bold  capitalize mt-4">Ta bort konto</h2>
-                    <form onSubmit={(e) => removeUser(e)}>
-                       
+                    <form onSubmit={(e) => removeUser(e)} className="mb-4">
+                       <p className="mt-4">Om du väljer att ta bort ditt konto så kommer all din information att försvinna!</p>
 
                         <div className="mt-4">
                             <button type="submit" className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Radera konto</button>

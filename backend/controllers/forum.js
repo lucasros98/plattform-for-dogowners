@@ -41,10 +41,14 @@ exports.getPosts = async (req, res, next) => {
 
     const posts = await ForumPost.find(search);
 
+    //count by categories
+    //const categories = await ForumPost.count()
+
     res.json({
         success: true,
         message: 'Success!',
-        posts: posts
+        posts: posts,
+        categories:[]
     });
 }
 

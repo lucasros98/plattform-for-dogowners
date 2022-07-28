@@ -11,15 +11,15 @@ var Schema = mongoose.Schema;
 const postSchema = new Schema({
     title: {
         type: String,
-        required:true
+        required: true
     },
     body: {
         type: String,
-        required:true
+        required: true
     },
     created: {
-        type:Date,
-        required:true,
+        type: Date,
+        required: true,
         default: Date.now
     },
     author: {
@@ -29,6 +29,7 @@ const postSchema = new Schema({
     },
     category: {
         type: String,
+        default: "Annat"
     },
     comments: [
         {
@@ -37,9 +38,27 @@ const postSchema = new Schema({
         }
     ],
     edited: {
-        type:Boolean,
-        default:false
+        type: Boolean,
+        default: false
     }
+});
+
+//check categories
+postSchema.pre('save', async function (next) {
+    let post = this;
+
+    const whiteList = [
+        'Hundskötsel',
+        'Hundträning',
+        'Hundraser',
+        'Hundvård',
+        'Annat']
+
+    if (! whiteList.includes(post.category)) {
+        post.category = 'Annat'
+    }
+
+    next();
 });
 
 module.exports = mongoose.model('ForumPost', postSchema);

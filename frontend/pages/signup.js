@@ -21,7 +21,12 @@ export default function Login() {
     e.preventDefault()
 
     if (password !== spassword) {
-      alert("Passwords don't match.")
+      Swal.fire({
+        title: 'Lösenorden matchar inte!',
+        text: 'Lösenorden som du angav matchar inte. Vänligen ange igen!',
+        icon: 'error',
+        confirmButtonText: 'Stäng'
+    })
       return;
     }
 

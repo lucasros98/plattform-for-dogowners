@@ -115,3 +115,16 @@ exports.updateUser = async(req, res, next) => {
     res.status(500).send(err)
   }
 }
+
+exports.removeUser = async(req, res, next) => {
+  const userId = req.user.user._id;
+
+  try {
+    const resp = await User.findByIdAndRemove(userId);
+    console.log(resp)
+    return res.send({message:"User has been removed", success:true})
+  }
+  catch(err) {
+    res.status(500).send(err)
+  }
+}

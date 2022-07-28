@@ -1,4 +1,4 @@
-const { createUser, loginUser,getUserInfo,logoutUser,updateUser} = require('./backend/controllers/user')
+const { createUser, loginUser,getUserInfo,logoutUser,updateUser,removeUser} = require('./backend/controllers/user')
 const { createDog,getDogsByOwner,createNewUpdate,removeDogUpdate,getDogBreeds,getDogMotion,editDog} = require('./backend/controllers/dog')
 const { getPosts, getSpecificPost,createPost,addComment,deletePost,hideComment } = require('./backend/controllers/forum')
 
@@ -18,6 +18,8 @@ router.get('/logout', logoutUser);
 //USER
 router.get('/user',verifyAuth, getUserInfo);
 router.put('/user',verifyAuth, updateUser);
+router.delete('/user',verifyAuth, removeUser);
+
 
 //DOG
 router.get('/dog',verifyAuth, getDogsByOwner);
