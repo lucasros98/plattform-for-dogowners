@@ -2,6 +2,9 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import ProfileImage from "@/components/Profile/Image"
 import Swal from 'sweetalert2'
+import { useAppContext } from '../contexts/AppContext';
+import { useRouter } from 'next/router'
+
 
 export default function Settings({ data }) {
     const [username, setUserName] = useState("")
@@ -9,6 +12,10 @@ export default function Settings({ data }) {
     const [bio, setBio] = useState("")
     const [image, setImage] = useState(false)
     const [preview, setPreview] = useState(false)
+
+    const context = useAppContext();
+    const router = useRouter()
+
 
     const getData = async () => {
         try {
@@ -61,6 +68,30 @@ export default function Settings({ data }) {
                 confirmButtonText: 'Stäng'
             })
         })
+    }
+
+    function removeUser(e) {
+        e.preventDefault()
+
+        Swal.fire({
+            title: 'Vill du ta bort ditt konto?',
+            text: 'Denna handlingen kan inte ändras. Ditt konto kommer vara borta för alltid.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#dedede', 
+            cancelButtonText:'Avbryt',
+            confirmButtonText: 'Ta bort'
+         }).then((result) => {
+            if(result.value){
+                axios.delete(("/user")).then((res)=> {
+                    if(res.data.success) {
+                        context.setUser(null)
+                        router.reload()
+                    }
+                })
+           }
+         })
     }
 
     function updateUserImage(e) {
@@ -140,7 +171,7 @@ export default function Settings({ data }) {
 
                         </div>
                     </form>
-                    <h1 className="text-xl font-bold  capitalize mt-4">Profilbild</h1>
+                    <h2 className="text-xl font-bold  capitalize mt-4">Profilbild</h2>
                     <form onSubmit={(e) => updateUserImage(e)}>
                         <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
                             <div>
@@ -169,6 +200,16 @@ export default function Settings({ data }) {
                         </div>
                         <div className="mt-4">
                             <button type="submit" disabled={!image} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 disabled:opacity-75">Spara bild</button>
+                        </div>
+                    </form>
+                    <hr className="border border-gray-100 my-3"/>
+                    <h2 className="text-xl font-bold  capitalize mt-4">Ta bort konto</h2>
+                    <form onSubmit={(e) => removeUser(e)}>
+                       
+
+                        <div className="mt-4">
+                            <button type="submit" className="text-white bg-red-700 hover:bg-red-800 focus:ring-4 focus:ring-red-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-600 dark:hover:bg-red-700 focus:outline-none dark:focus:ring-red-800">Radera konto</button>
+
                         </div>
                     </form>
 

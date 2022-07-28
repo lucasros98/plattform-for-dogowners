@@ -1,13 +1,21 @@
-import { useState } from "react"
+import { useState,useEffect } from "react"
 import axios from "axios"
 import endpoints from "../data/userEndpoints"
 import router from 'next/router'
+import { useAppContext } from '../contexts/AppContext';
 import Swal from 'sweetalert2'
 
 export default function Login() {
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
   const [spassword, setSPassword] = useState("")
+
+  const context = useAppContext();
+
+
+  useEffect(() => {
+    if(context.user) router.push("/profile")
+  },[context])
 
   function createUser(e) {
     e.preventDefault()
