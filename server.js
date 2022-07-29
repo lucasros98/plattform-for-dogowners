@@ -7,8 +7,6 @@ const session = require("express-session");
 const MongoStore = require("connect-mongo")
 const {Connection} = require('./backend/database/connection')
 
-const User =  require('./backend/models/user')
-
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan')
@@ -23,6 +21,8 @@ Connection.connect();
 
 
 const dev = process.env.NODE_ENV !== "production";
+const hostname = 'localhost'
+const port = process.env.PORT || 3000
 const app = next({
   dev,
   dir: "./frontend"

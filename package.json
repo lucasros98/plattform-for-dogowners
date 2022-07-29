@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./server.js localhost 3000",
-    "build": "next build",
-    "start": "nodemon ./server.js localhost 3000",
+    "build": "NODE_ENV=production node ./server.js",
+    "start": "NODE_ENV=production node ./server.js",
     "lint": "next lint"
   },
   "dependencies": {
