@@ -19,7 +19,6 @@ const router = require('./routes')
 
 Connection.connect();
 
-
 const dev = process.env.NODE_ENV !== "production";
 const hostname = 'localhost'
 const port = process.env.PORT || 3000
