@@ -3,6 +3,7 @@ require('dotenv').config();
 const http = require("http");
 const express = require('express')
 
+
 const session = require("express-session");
 const MongoStore = require("connect-mongo")
 const {Connection} = require('./backend/database/connection')
@@ -21,9 +22,10 @@ Connection.connect();
 
 const dev = process.env.NODE_ENV !== "production";
 const hostname = process.env.HOST || "localhost"
-const port = process.env.PORT || 3000
+const PORT = process.env.PORT || 3000
+
 const app = next({
-  dev:false,
+  dev:dev,
   dir: "./frontend"
 });
 const handle = app.getRequestHandler();
@@ -60,8 +62,8 @@ app.prepare().then(() => {
     // handling everything else with Next.js
     server.get("*", handle);
   
-    server.listen(port, () => {
-      console.log(`listening on port ${port}`);
+    server.listen(PORT, () => {
+      console.log(`listening on PORT ${PORT}`);
     });
   }).catch(ex => {
     console.error(ex.stack);
