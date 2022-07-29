@@ -81,7 +81,7 @@ export default function QuizComponent ({quiz, mode}) {
               <div className={""}>
                 {quiz.questions[currentIndex]?.options.map((o, i) => {
                   return (
-                      <QuizOption i={i} handleOptionSelect={handleOptionSelect} o={o}/>
+                      <QuizOption key={i+"indexw"} i={i} handleOptionSelect={handleOptionSelect} o={o}/>
                   );
                 })}
               </div>

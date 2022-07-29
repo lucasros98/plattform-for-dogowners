@@ -8,7 +8,7 @@ import CommentModal from "@/components/Forum/CommentModal"
 import Dropdown from "@/components/Buttons/Dropdown";
 
 
-export default function post() {
+export default function ForumPost() {
     const [commentModal, setCommentModal] = useState(false)
     const [post, setPost] = useState(null)
     const router = useRouter()

@@ -8,10 +8,10 @@ export default function CategoryFilter({setChosenGategory}) {
     },[category])
 
     return (<>
-        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
+        <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
             Kategori
         </label>
-        <div class="relative max-w-xs">
+        <div className="relative max-w-xs">
             <select value={category} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full px-4 py-2.5" onChange={(e) => setCategory(e.target.value)}>
                 <option value={"Alla"}>Alla</option>
                 <option value={"Hundskötsel"}>Hundskötsel</option>

@@ -25,7 +25,7 @@ export default function Dropdown({ children, dropDownClass = "" }) {
                 </svg>
             </button>
 
-            {show && <div aria-controls="id-container" className="py-1 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
+            {show && <div aria-controls="id-container" className="py-1 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
                     {children}
             </div>}
         </div>

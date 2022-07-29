@@ -20,10 +20,10 @@ const router = require('./routes')
 Connection.connect();
 
 const dev = process.env.NODE_ENV !== "production";
-const hostname = 'localhost'
+const hostname = process.env.HOST || "localhost"
 const port = process.env.PORT || 3000
 const app = next({
-  dev,
+  dev:false,
   dir: "./frontend"
 });
 const handle = app.getRequestHandler();
@@ -46,8 +46,6 @@ app.prepare().then(() => {
     server.use(passport.initialize());
     server.use(passport.session());
 
-
-
     // support parsing of application/json type post data
     server.use(bodyParser.json());
     server.use(cookieParser());
@@ -56,17 +54,17 @@ app.prepare().then(() => {
     //support parsing of application/x-www-form-urlencoded post data
     server.use(bodyParser.urlencoded({ extended: true }));
 
-
-
     server.use(router);
     router.use(morgan('combined'))
-
 
     // handling everything else with Next.js
     server.get("*", handle);
   
-    http.createServer(server).listen(port, () => {
+    server.listen(port, () => {
       console.log(`listening on port ${port}`);
     });
+  }).catch(ex => {
+    console.error(ex.stack);
+    process.exit(1);
   });
   

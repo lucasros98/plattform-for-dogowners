@@ -53,7 +53,7 @@ export default function NewPostModal({ visible, setVisible,updateDog}) {
                                 value={text}
                                 onChange={(e)=> setText(e.target.value)}
                                 placeholder="Skriv något roligt om din hund"
-                                class="w-full resize-none rounded-lg border border-[#e0e0e0] bg-gray-50 py-3 px-3 text-sm text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                className="w-full resize-none rounded-lg border border-[#e0e0e0] bg-gray-50 py-3 px-3 text-sm text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                                 ></textarea>
                             </div>
                             <div>
