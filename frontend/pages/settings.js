@@ -140,7 +140,7 @@ export default function Settings({ data }) {
 
     return (
         <>
-            <div className="min-h-screen pt-2 mb-10">
+            <div className="min-h-screen pt-2 px-3 mb-10">
                 <div className="container mx-auto mt-6 max-w-4xl">
                     <h1 className="text-xl font-bold  capitalize ">Inställningar</h1>
                     <form onSubmit={(e) => saveUser(e)}>
@@ -171,6 +171,7 @@ export default function Settings({ data }) {
 
                         </div>
                     </form>
+                    <hr className="border border-gray-100 my-8"/>
                     <h2 className="text-xl font-bold  capitalize mt-4">Profilbild</h2>
                     <form onSubmit={(e) => updateUserImage(e)}>
                         <div className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2">
@@ -202,7 +203,7 @@ export default function Settings({ data }) {
                             <button type="submit" disabled={!image} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800 disabled:opacity-75">Spara bild</button>
                         </div>
                     </form>
-                    <hr className="border border-gray-100 my-3"/>
+                    <hr className="border border-gray-100 my-8"/>
                     <h2 className="text-xl font-bold  capitalize mt-4">Ta bort konto</h2>
                     <form onSubmit={(e) => removeUser(e)} className="mb-4">
                        <p className="mt-4">Om du väljer att ta bort ditt konto så kommer all din information att försvinna!</p>

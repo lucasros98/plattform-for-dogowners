@@ -42,7 +42,7 @@ export default function Login() {
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Namn
               </label>
-              <input  type="text" value={name} class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-6 p-2.5 " onChange={(e) => setName(e.target.value)} placeholder="Gizmo" />
+              <input  type="text" value={name} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-6 p-2.5 " onChange={(e) => setName(e.target.value)} placeholder="Gizmo" />
 
             </div>
           </div>
@@ -51,7 +51,7 @@ export default function Login() {
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Ras
               </label>
-              <input  type="text" value={breed} class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-6 p-2.5 " onChange={(e) => setBreed(e.target.value)} placeholder="Golden retriever" />
+              <input  type="text" value={breed} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-6 p-2.5 " onChange={(e) => setBreed(e.target.value)} placeholder="Golden retriever" />
             </div>
           </div>
           <div className="flex flex-wrap -mx-3 mb-6">
@@ -60,13 +60,13 @@ export default function Login() {
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="grid-first-name">
                 Födelsdatum
               </label>
-              <div class="relative">
-                <input type="date" value={birth} class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-6 p-2.5 " onChange={(e) => setBirth(e.target.value)} placeholder="Datum" />
+              <div className="relative">
+                <input type="date" value={birth} className="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pl-6 p-2.5 " onChange={(e) => setBirth(e.target.value)} placeholder="Datum" />
               </div>            
               </div>
           </div>
 
-          <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Lägg till ny hund</button>
+          <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">Lägg till ny hund</button>
         </form>
       </div>
     </div>

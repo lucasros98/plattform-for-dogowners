@@ -122,6 +122,8 @@ exports.removeUser = async(req, res, next) => {
   try {
     const resp = await User.findByIdAndRemove(userId);
     console.log(resp)
+    
+    res.clearCookie("token");
     return res.send({message:"User has been removed", success:true})
   }
   catch(err) {

@@ -103,7 +103,7 @@ export default function post() {
                         </div>}
 
                     </div>
-                    <small className="mb-4">Publicerad av  {post.author.username},  {new Date(post.created).toLocaleString()}</small>
+                    <small className="mb-4">Publicerad av  {post.author ? post.author.username : "Bortagen användare"},  {new Date(post.created).toLocaleString()}</small>
                     <div className="bg-gray-50 p-4 mt-4 shadow-sm rounded-lg border border-gray-100">{post.body}</div>
                 </div>
           
@@ -116,7 +116,7 @@ export default function post() {
                     </div>
                     <div className="grid gap-4">
                         {post.comments.map((c) => {
-                            return <Comment key={c._id} id={c._id} body={c.body} hidden={c.hidden} date={c.date} isOwner={loggedIn && context.user._id === c.author._id} author={c.author ? c.author.username : "Saknas"} hideComment={hideComment}/>
+                            return <Comment key={c._id} id={c._id} body={c.body} hidden={c.hidden} date={c.date} isOwner={loggedIn && context.user._id === c.author._id} author={c.author ? c.author.username : "Bortagen användare"} hideComment={hideComment}/>
                         })}
                     </div>
                 </div>
