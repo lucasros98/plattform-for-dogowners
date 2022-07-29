@@ -66,8 +66,8 @@ app.prepare().then(() => {
     // handling everything else with Next.js
     server.get("*", handle);
   
-    http.createServer(server).listen(process.env.PORT, () => {
-      console.log(`listening on port ${process.env.PORT}`);
+    http.createServer(server).listen(port, () => {
+      console.log(`listening on port ${port}`);
     });
   });
   
