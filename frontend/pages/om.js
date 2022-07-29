@@ -8,10 +8,9 @@ export default function About({ data }) {
                     <div className="space-y-6 md:space-y-0 md:flex md:gap-6 lg:items-center lg:gap-12">
                         <div className="md:7/12 lg:w-6/12">
                             <h1 className="text-2xl text-gray-900 font-bold md:text-4xl">Om oss</h1>
-                            <p className="mt-6 text-gray-600">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scram
+                            <p className="mt-6 text-gray-600">Hundvalpen är ett bra sätt att få hjälp med din nya hund. På plattformen kan göra quiz, prata med andra hundägare och följa din valps utveckling.
                             </p>
-                            <p className="mt-4 text-gray-600">bled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</p>
-
+                            <p className="mt-4 text-gray-600">Målet med hundvalpen är framförallt att göra det enklare för hundägare att få tillgång till bästa möjliga information så att de kan fatta välgrundade beslut om sin nya hund. Hundvalpen är också ett utmärkt sätt att få kontakt med andra valpägare.</p>
                         </div>
                         <div className="md:5/12 lg:w-5/12">
                             <img src={"/static/dog.svg"} layout='fill' />
