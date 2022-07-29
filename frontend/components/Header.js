@@ -56,7 +56,7 @@ function Navbar() {
 									</div>
 								</div>
 							</div>
-							<div className="mr-10 flex md:hidden ">
+							<div className="mr-4 flex md:hidden ">
 								<button
 									onClick={() => setIsOpen(!isOpen)}
 									type="button"
