@@ -1,5 +1,7 @@
+require('dotenv').config();
 const mongoose = require('mongoose');
 const {quizData} = require('./initialData')
+
 
 class Connection {
     static connect() {
@@ -20,7 +22,7 @@ class Connection {
 }
 
 Connection.db = null;
-Connection.url = 'mongodb://localhost:27017/dogplatform'
+Connection.url = process.env.MONGODB_URI
 Connection.options = {
     useNewUrlParser: true,
     useUnifiedTopology: true
