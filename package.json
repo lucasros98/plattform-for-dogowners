@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./server.js localhost 3000",
-    "build": "next build ./frontend && node ./server.js",
-    "start": "next build ./frontend && node ./server.js",
+    "build": "next build ./frontend && node server.js",
+    "start": "next build ./frontend && node server.js",
     "lint": "next lint"
   },
   "dependencies": {

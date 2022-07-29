@@ -35,7 +35,7 @@ app.prepare().then(() => {
     // Express Session
     server.use(
       session({
-          secret: "very secret this is",
+          secret: process.env.JWT_TOP_SECRET,
           resave: false,
           saveUninitialized: true,
           store: MongoStore.create({ mongoUrl: process.env.MONGODB_URI })
