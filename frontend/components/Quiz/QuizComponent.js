@@ -39,7 +39,7 @@ export default function QuizComponent ({quiz, mode}) {
         <div className="container">
           <h1 className={"text-4xl font-bold leading-normal mt-0 mb-4"}>Quiz: {quiz.title}</h1>
           {quizCompleted && (
-            <div className={"bg-white w-100 p-4 rounded-xl"}>
+            <div className={"bg-white w-100 p-4 rounded-xl border border-gray-100 shadow-sm"}>
               <h5 className="font-bold"> 
                 Du fick {points} /{" "}
                 {quiz.questions.length} rätt{" "} 🎉
@@ -48,12 +48,12 @@ export default function QuizComponent ({quiz, mode}) {
               <div className={""}>
                 {quiz.questions?.map((q, i) => {
                   return (
-                    <div key={i} className={"p-3 bg-gray-50 shadow-sm mb-2 rounded-lg border-gray-100"}>
-                      {i + 1}. {q.text}{" "}
-                      <div className="option-answer-wrap">
+                    <div key={i} className={"p-3 bg-gray-50 shadow-sm mb-4 rounded-lg border border-gray-100"}>
+                      <h5 className="italic">{i + 1}. {q.text}{" "}</h5>
+                      <div className="option-answer-wrap my-4">
                         {quiz.questions[i]?.options.map((o, j) => {
                           return (
-                            <div key={j} className={`bg-white p-2 m-2 rounded-lg flex ${answers[i] === j ? "bg-gray-200" : ""}`}>
+                            <div key={j} className={`bg-white p-2 my-3 rounded-lg border border-gray-200 shadow-sm flex ${answers[i] === j ? "bg-orange-300" : ""}`}>
                               <div>{o}</div>
                               <div className="ml-auto">
                                   {j === q.correctAnswerIndex ? "✅" : ""}
@@ -73,7 +73,7 @@ export default function QuizComponent ({quiz, mode}) {
           )}
 
           {!quizCompleted && (
-            <div className={"bg-white w-100 p-4 rounded-xl"}>
+            <div className={"bg-white w-100 p-4 rounded-xl  border border-gray-100 shadow-sm"}>
               <div className={"text-xl font-medium leading-normal mb-5"}>
                 {currentIndex + 1} / {quiz.questions.length}.{" "}
                 {quiz.questions[currentIndex]?.text}

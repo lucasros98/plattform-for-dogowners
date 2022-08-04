@@ -26,7 +26,7 @@ export default function QuizOption({ i, o, handleOptionSelect }) {
   }
 
   return (
-    <div key={i} onTouchStart={() => {return null}} className={`p-3 bg-gray-50 shadow-sm mb-2 hover:cursor-pointer hover:bg-emerald-600 hover:text-white rounded-lg ${animate && "option-animate"}`} onClick={() => handleOptionSelect(i)}>
+    <div key={i} onTouchStart={() => {return null}} className={`p-3 bg-gray-50 border border-gray-100 shadow-sm mb-2 hover:cursor-pointer hover:bg-emerald-600 hover:text-white rounded-lg ${animate && "option-animate"}`} onClick={() => handleOptionSelect(i)}>
       {value}
     </div>
   );

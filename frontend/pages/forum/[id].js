@@ -95,7 +95,7 @@ export default function ForumPost() {
                 <div className="bg-white width-full p-3 sm:p-6 rounded-lg shadow-sm">
                     <div className="flex">
                         <h1 className="mb-2 text-3xl font-extrabold text-gray-700 rounded-lg">{post.title}</h1>
-                        {loggedIn && context.user._id === post.author._id && <div className="ml-auto">
+                        {loggedIn && post.author && context.user._id === post.author._id && <div className="ml-auto">
                             <Dropdown>
                                 <button className="w-full text-gray-700 block px-4 py-2 text-sm text-start hover:bg-gray-100" onClick={(e) => removePost(e)}>Ta bort</button>
 
@@ -106,17 +106,17 @@ export default function ForumPost() {
                     <small className="mb-4">Publicerad av  {post.author ? post.author.username : "Bortagen användare"},  {new Date(post.created).toLocaleString()}</small>
                     <div className="bg-gray-50 p-4 mt-4 shadow-sm rounded-lg border border-gray-100">{post.body}</div>
                 </div>
-          
-                <div className="bg-white width-full p-3 sm:p-6 rounded-lg mt-3 shadow-sm">
-                <div className="block sm:hidden mb-3">{loggedIn && <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => setCommentModal(true)}>Skriv en kommentar</button>}
+                <div className="block sm:hidden m-3 width-full">{loggedIn && <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => setCommentModal(true)}>Skriv en kommentar</button>}
                 </div>
+                <div className="bg-white width-full p-3 sm:p-6 rounded-lg mt-3 shadow-sm">
+          
                     <div className="flex mb-6 ">
                         <h1 className="text-xl font-extrabold text-gray-700 rounded-lg">Kommentarer ({post.comments.length} st)</h1>
                         {loggedIn && <button className="hidden sm:block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800" onClick={() => setCommentModal(true)}>Skriv en kommentar</button>}
                     </div>
                     <div className="grid gap-4">
                         {post.comments.map((c) => {
-                            return <Comment key={c._id} id={c._id} body={c.body} hidden={c.hidden} date={c.date} isOwner={loggedIn && context.user._id === c.author._id} author={c.author ? c.author.username : "Bortagen användare"} hideComment={hideComment}/>
+                            return <Comment key={c._id} id={c._id} body={c.body} hidden={c.hidden} date={c.date} isOwner={loggedIn && c.author && context.user._id === c.author._id} author={c.author ? c.author.username : "Bortagen användare"} hideComment={hideComment}/>
                         })}
                     </div>
                 </div>

@@ -3,7 +3,7 @@ import axios from "axios"
 import Dropdown from "../Buttons/Dropdown"
 import Swal from 'sweetalert2'
 
-export default function DogUpdate({ user, data,updateDog }) {
+export default function DogUpdate({ user, data,updateDog,image }) {
 
     function removeUpdate() {
         Swal.fire({
@@ -29,7 +29,8 @@ export default function DogUpdate({ user, data,updateDog }) {
     return (
             <div className="px-5 py-4 bg-white  shadow rounded-lg  w-full">
                 <div className="flex mb-4">
-                    {false &&<img className="w-12 h-12 rounded-full" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80" />}
+
+                    {image &&<img className="w-12 h-12 rounded-full" src={`data:${image.contentType};base64,${Buffer.from(image.data).toString('base64')}`} />}
                     <div className="ml-2 mt-0.5">
                         <span className="block font-medium text-base leading-snug text-black ">{user.username}</span>
                         <span className="block text-sm text-gray-500 font-light leading-snug">{new Date(data.date).toLocaleDateString()}</span>

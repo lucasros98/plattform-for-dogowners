@@ -37,8 +37,8 @@ const Profile = ({ data }) => {
             if (res.data && res.data.user) {
                 setLoading(false)
 
-                const {user,dog,dogData} = res.data
-
+                const { user, dog, dogData } = res.data
+                console.log(res.data.user)
                 setUser(user)
                 setDog(dog)
                 setDogData(dogData)
@@ -77,20 +77,19 @@ const Profile = ({ data }) => {
                 <div className="md:flex no-wrap md:-mx-2">
                     <div className="w-full md:w-4/12 md:mx-2">
                         <div className="bg-white p-4 rounded-lg">
-                            <div className="flex">
+                            <div className="block lg:flex mb-4">
                                 <ImagePicker image={image} />
 
-                                <div className="ml-4 grid content-center">
+                                <div className="lg:ml-4 grid content-center">
                                     <h1 className="text-gray-900 font-bold text-xl leading-8 my-1">{user.username ? user.username : "Namn saknas"}</h1>
                                     <h3 className="text-gray-600 font-lg text-semibold leading-6">{user.email}</h3>
-
                                 </div>
                             </div>
                             {user.bio && <div className="mt-3 mb-3">
                                 <label>Bio</label>
                                 <p className="text-sm text-gray-500 hover:text-gray-600  ">{user.bio}</p>
-                                
-                            </div> }
+
+                            </div>}
                             <Link href={"/settings"} className={"mt-4"}>Redigera din profil →</Link>
                             <ul
                                 className="bg-gray-100 text-gray-600 hover:text-gray-700 hover:shadow py-2 px-3 mt-3 divide-y rounded shadow-sm">
@@ -101,20 +100,20 @@ const Profile = ({ data }) => {
                             </ul>
                         </div>
                         <div className="bg-white  mt-4 p-4 rounded-lg">
-                            <h1 className="text-gray-900 font-bold text-lg leading-8 my-1">Tagna quiz</h1>
-                            {!user.quizTaken && <div>
+                            <div className="flex mb-3">
+                                <h1 className="text-gray-900 font-bold text-lg leading-8 my-1">Quiz</h1>
+                                <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={(e) => setShowPostForm(true)}>Gör quiz</button>
+                            </div>
+                            {!user.quizTaken || user.quizTaken.length === 0 && <div>
                                 <p className="text-gray-700">Inga quiz tagna</p>
-                                <Link href="/quiz"><button className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 mt-4 text-center ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Visa Quiz</button></Link>
                             </div>}
                             {
                                 user.quizTaken && <div>
                                     <div className="grid gap-3">
                                         {user.quizTaken.map((quiz => {
-                                            return <TakenQuiz key={quiz.quiz._id} title={quiz.quiz.title} completed={quiz.timesTaken} score={quiz.bestScore}/>
+                                            return <TakenQuiz key={quiz.quiz._id} title={quiz.quiz.title} completed={quiz.timesTaken} score={quiz.bestScore} />
                                         }))}
                                     </div>
-                                    <Link href="/quiz"><button className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 mt-4 text-center ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Gör ett nytt quiz</button></Link>
-
                                 </div>
                             }
                         </div>
@@ -124,7 +123,7 @@ const Profile = ({ data }) => {
 
                         <div className="my-4"></div>
 
-                       {dog && <div className="bg-white p-3 shadow-sm rounded-lg">
+                        {dog && <div className="bg-white p-3 shadow-sm rounded-lg">
                             <div className="w-full">
                                 <div className="flex">
                                     <div className="text-gray-900 font-bold text-lg leading-8 my-1">
@@ -136,7 +135,7 @@ const Profile = ({ data }) => {
                                     {false && <ul className="list-inside space-y-2">
                                         <li className="text-gray-600">Inga uppdateringar gjorda</li>
                                     </ul>}
-                                    <Updates user={user} updates={dog.updates} updateDog={setDog} />
+                                    <Updates user={user} updates={dog.updates} updateDog={setDog} image={image} />
                                 </div>
 
                             </div>
