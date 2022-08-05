@@ -7,18 +7,18 @@ import { useAppContext } from '../contexts/AppContext';
 
 function Navbar() {
 	const [isOpen, setIsOpen] = useState(false);
-	const [login,setLogin] = useState(false)
-	const [loggedIn,setLoggedIn] = useState(false)
+	const [login, setLogin] = useState(false)
+	const [loggedIn, setLoggedIn] = useState(false)
 
 	const context = useAppContext();
 
-	useEffect(()=> {
-		if(context.user) setLoggedIn(true)
-	},[context])
+	useEffect(() => {
+		if (context.user) setLoggedIn(true)
+	}, [context])
 
 	return (
 		<>
-			<LoginModal visible={login} setVisible={setLogin}/>
+			<LoginModal visible={login} setVisible={setLogin} />
 			<div>
 				<nav className="shadow-sm w-full z-10 bg-white">
 					<div className="w-full">
@@ -43,15 +43,27 @@ function Navbar() {
 												{link.title}
 											</Link>
 										))}
-										{loggedIn ? <Link
+										{loggedIn ? <div className={"relative inline-block text-left profile-link"} >
+											<Link
 												href={"/profile"}
 												smooth={"true"}
 												offset={50}
 												duration={500}
 												className="cursor-pointer hover:bg-blue-600 text-black hover:text-white px-3 py-2 rounded-md text-sm font-medium"
 											>
-											Profil
-											</Link>: <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-4 rounded-full" data-modal-toggle="authentication-modal" onClick={() => setLogin(true)}>Logga in</button>}
+												Profil
+											</Link>
+											<div aria-controls="id-container" className="hidden submenu py-1 origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabIndex="-1">
+												<Link href={"/settings"}>
+													<button className="w-full text-gray-700 block px-4 py-2 text-sm text-start hover:bg-gray-100">Inställningar</button>
+												</Link>
+												<Link href={"/logout"}>
+													<button className="w-full text-gray-700 block px-4 py-2 text-sm text-start hover:bg-gray-100">Logga ut</button>
+												</Link>
+											</div>
+										</div>
+
+											: <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mx-4 rounded-full" data-modal-toggle="authentication-modal" onClick={() => setLogin(true)}>Logga in</button>}
 
 									</div>
 								</div>
@@ -131,28 +143,43 @@ function Navbar() {
 										</Link>
 									))}
 									{loggedIn ?
-									<Link
-									href="/profile"
-									smooth={true}
-									offset={50}
-									duration={500}
-									className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-									key="profile"
+										<div>
+														<Link
+											href="/profile"
+											smooth={true}
+											offset={50}
+											duration={500}
+											className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+											key="profile"
 
-								>
-									Profil
-								</Link>:
-									<Link
-										href="/login"
-										smooth={true}
-										offset={50}
-										duration={500}
-										className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-										key="login"
+										>
+											Profil
+										</Link>
+										<Link
+											href="/logout"
+											smooth={true}
+											offset={50}
+											duration={500}
+											className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+											key="profile"
 
-									>
-										Logga in
-									</Link>}
+										>
+											Logga ut
+										</Link>
+
+										</div>
+							 :
+										<Link
+											href="/login"
+											smooth={true}
+											offset={50}
+											duration={500}
+											className="cursor-pointer hover:bg-blue-600 text-black hover:text-white block px-3 py-2 rounded-md text-base font-medium"
+											key="login"
+
+										>
+											Logga in
+										</Link>}
 
 
 								</div>

@@ -21,3 +21,12 @@ a {
 .backdrop {
   background-color: rgba(0,0,0,0.5);
 }
+
+
+.profile-link .submenu{ 
+  transition: ease-out 300ms;
+}
+
+.profile-link:hover .submenu{
+  display: block;
+}

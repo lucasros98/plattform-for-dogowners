@@ -78,10 +78,10 @@ exports.loginUser = (req, res, next) => {
 exports.logoutUser = (req,res, next) => {
   const token = req.cookies.token;
 
-  if(!token) return res.send({success:false,message:"Already logout"})
+  if(!token) return res.redirect("/")
 
   res.clearCookie("token");
-  return res.send({success:true,message:"Logout"})
+  return res.redirect("/")
 }
 
 exports.getUserInfo = async(req, res, next) => {
