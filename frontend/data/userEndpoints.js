@@ -1,4 +1,4 @@
-const API_URL = "platform-for-dogowners.vercel.app"
+const API_URL = "https://platform-for-dogowners.vercel.app"
 
 export default {
     signup:API_URL+"/signup",
