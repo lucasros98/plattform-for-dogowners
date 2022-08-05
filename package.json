@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "nodemon ./server.js localhost 3000",
-    "build": "next build ./frontend && node ./server.js",
+    "build": "NODE_ENV=production node ./server.js -p $PORT",
     "start": "NODE_ENV=production node ./server.js -p $PORT",
     "lint": "next lint"
   },
