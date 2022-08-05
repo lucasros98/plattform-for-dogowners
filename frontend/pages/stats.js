@@ -1,6 +1,6 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
-import Chart from "@/components/Charts/Chart";
+import Chart from "../components/Charts/Chart";
 
 const Stats = () => {
     const [loading, setLoading] = useState(true)
