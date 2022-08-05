@@ -22,7 +22,7 @@ export default function Login() {
       email, password
     }
 
-    axios.post(endpoints.login, data).then((res) => {
+    axios.post(endpoints.login, data,{ withCredentials: true }).then((res) => {
       if (res.data.success) {
         
         const token = res.data.token;

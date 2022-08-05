@@ -47,7 +47,8 @@ var corsOptions = {
       callback(new Error('Not allowed by CORS'))
     }
   },
-  credentials: true
+  credentials: true,
+  
 }
 server.use(cors(corsOptions));
 

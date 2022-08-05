@@ -4,7 +4,7 @@ function verifyAuth(req, res, next) {
 
     const token = req.cookies.token;
 
-    console.log(token)
+    console.log("Token: " +token)
     if (token == null) {
       //redirct to login
       return res.send({success:false,message:"No token"})

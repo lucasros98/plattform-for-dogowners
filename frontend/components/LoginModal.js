@@ -29,7 +29,7 @@ export default function LoginModal({ visible, setVisible }) {
             email, password
         }
 
-        axios.post(endpoints.login, data).then((res) => {
+        axios.post(endpoints.login, data,{ withCredentials: true }).then((res) => {
             if (res.data.success) {
                 close()
                 const user = res.data.user;
