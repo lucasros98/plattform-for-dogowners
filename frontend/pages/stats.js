@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import Chart from "../components/Charts/Chart";
+import userEndpoints from "../data/userEndpoints"
 
 const Stats = () => {
     const [loading, setLoading] = useState(true)
@@ -10,7 +11,7 @@ const Stats = () => {
 
     const getData = async () => {
         try {
-            let res = await axios.get("/user")
+            let res = await axios.get(userEndpoints.quizzesURL)
             console.log(res.data)
 
             if (res.data && res.data.user) {

@@ -1,6 +1,9 @@
 import {useEffect,useState} from "react"
 import axios from "axios"
 import QuizCard from "@/components/Quiz/QuizCard"
+import userEndpoints from "@/data/userEndpoints"
+
+
 
 export default function Quiz() {
     const [quizes,setQuizes] = useState([])
@@ -10,7 +13,7 @@ export default function Quiz() {
     },[])
 
     const getQuizes = async () => {
-        let res = await axios.get("http://localhost:3000/quizzes")
+        let res = await axios.get(userEndpoints.quizzesURL)
         if(res.data) setQuizes(res.data)
     }
 
