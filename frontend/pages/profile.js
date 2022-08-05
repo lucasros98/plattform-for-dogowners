@@ -102,7 +102,7 @@ const Profile = ({ data }) => {
                         <div className="bg-white  mt-4 p-3 rounded-lg shadow-sm">
                             <div className="flex mb-3">
                                 <h1 className="text-gray-900 font-bold text-lg leading-8 my-1">Quiz</h1>
-                                <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" onClick={(e) => setShowPostForm(true)}>Gör quiz</button>
+                                <Link href="/quiz"><button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 font-medium rounded-full text-sm px-5 py-2.5 text-center ml-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Gör quiz</button></Link>
                             </div>
                             {!user.quizTaken || user.quizTaken.length === 0 && <div>
                                 <p className="text-gray-700">Inga quiz tagna</p>
