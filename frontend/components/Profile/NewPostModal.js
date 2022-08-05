@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
+import userEndpoints from "../../data/userEndpoints"
 
 export default function NewPostModal({ visible, setVisible,updateDog}) {
     const [show, setShow] = useState(false)
@@ -26,7 +27,7 @@ export default function NewPostModal({ visible, setVisible,updateDog}) {
         activityTime
        }
 
-       axios.post("/dog/update",body).then((res)=> {
+       axios.post(userEndpoints.dog+"/update",body,{ withCredentials: true }).then((res)=> {
         if(res.data.success) {
             close()
             updateDog(res.data.dog)

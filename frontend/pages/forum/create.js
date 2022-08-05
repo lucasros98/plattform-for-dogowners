@@ -2,6 +2,8 @@ import { useState } from "react"
 import axios from "axios"
 import router from 'next/router'
 import Swal from 'sweetalert2'
+import userEndpoints from "@/data/userEndpoints"
+
 
 
 export default function Login() {
@@ -18,7 +20,7 @@ export default function Login() {
         category
     }
 
-    axios.post("/post",bodyData).then((res)=> {
+    axios.post(userEndpoints.forumPost,bodyData,{ withCredentials: true }).then((res)=> {
       if(res.data.success) {
         console.log(res.data)
         router.push('/forum/'+res.data.post._id, undefined, { shallow: true })

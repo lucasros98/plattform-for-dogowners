@@ -4,9 +4,10 @@ import Link from "next/link"
 import DogInfo from "@/components/Profile/DogInfo"
 import NewPostModal from "@/components/Profile/NewPostModal"
 import ImagePicker from "@/components/Profile/ImagePicker"
-
 import Updates from "@/components/Profile/Updates"
 import TakenQuiz from "@/components/Quiz/TakenQuiz"
+import userEndpoints from "@/data/userEndpoints"
+
 
 
 export async function getServerSideProps({ req, res }) {
@@ -31,7 +32,8 @@ const Profile = ({ data }) => {
 
     const getData = async () => {
         try {
-            let res = await axios.get("/user")
+            console.log(userEndpoints.user)
+            let res = await axios.get(userEndpoints.user,{ withCredentials: true })
             console.log(res.data)
 
             if (res.data && res.data.user) {
@@ -59,7 +61,7 @@ const Profile = ({ data }) => {
     };
 
     const getProfileImage = async (imageId) => {
-        let res = await axios.get("http://localhost:3000/image/" + imageId)
+        let res = await axios.get(userEndpoints.image+"/" + imageId,{ withCredentials: true })
         if (res.data.img) setImage(res.data.img)
     }
 

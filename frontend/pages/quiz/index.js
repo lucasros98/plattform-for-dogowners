@@ -3,8 +3,6 @@ import axios from "axios"
 import QuizCard from "@/components/Quiz/QuizCard"
 import userEndpoints from "@/data/userEndpoints"
 
-
-
 export default function Quiz() {
     const [quizes,setQuizes] = useState([])
 
@@ -13,7 +11,7 @@ export default function Quiz() {
     },[])
 
     const getQuizes = async () => {
-        let res = await axios.get(userEndpoints.quizzesURL)
+        let res = await axios.get(userEndpoints.quizzes,{ withCredentials: true })
         if(res.data) setQuizes(res.data)
     }
 

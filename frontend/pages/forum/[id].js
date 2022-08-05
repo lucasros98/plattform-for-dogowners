@@ -6,6 +6,8 @@ import { useAppContext } from '../../contexts/AppContext';
 import Comment from "@/components/Forum/Comment"
 import CommentModal from "@/components/Forum/CommentModal"
 import Dropdown from "@/components/Buttons/Dropdown";
+import userEndpoints from "@/data/userEndpoints"
+
 
 
 export default function ForumPost() {
@@ -27,7 +29,7 @@ export default function ForumPost() {
 
 
     const getPost = async () => {
-        let res = await axios.get("/post/" + id)
+        let res = await axios.get(userEndpoints.forumPost+"/" + id,{ withCredentials: true })
         if (res.data) setPost(res.data.post)
     }
 
@@ -43,7 +45,7 @@ export default function ForumPost() {
             confirmButtonText: 'Ja'
          }).then(async(result) => {
             if(result.value){
-                let res = await axios.delete("/post/" + id)
+                let res = await axios.delete(userEndpoints.post+"/" + id,{ withCredentials: true })
                 if (res.data) {
                     Swal.fire({
                         title: 'Lyckades!',
@@ -70,7 +72,7 @@ export default function ForumPost() {
             confirmButtonText: 'Ja'
          }).then(async(result) => {
             if(result.value){
-                let res = await axios.delete("/comment/" + id)
+                let res = await axios.delete(userEndpoints.forumComment+"/" + id,{ withCredentials: true })
                 if (res.data.success) {
                     Swal.fire({
                         title: 'Lyckades!',

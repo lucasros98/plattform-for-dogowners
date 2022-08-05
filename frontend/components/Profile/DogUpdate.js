@@ -2,6 +2,8 @@ import "moment"
 import axios from "axios"
 import Dropdown from "../Buttons/Dropdown"
 import Swal from 'sweetalert2'
+import userEndpoints from "../../data/userEndpoints"
+
 
 export default function DogUpdate({ user, data,updateDog,image }) {
 
@@ -17,7 +19,7 @@ export default function DogUpdate({ user, data,updateDog,image }) {
             confirmButtonText: 'Ja'
          }).then((result) => {
             if(result.value){
-                axios.delete(("/dog/update/"+data._id)).then((res)=> {
+                axios.delete(userEndpoints.dog+"/update/"+data._id,{ withCredentials: true }).then((res)=> {
                     if(res.data.success) {
                         updateDog(res.data.dog)
                     }

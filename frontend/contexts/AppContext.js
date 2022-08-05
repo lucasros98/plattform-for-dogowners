@@ -1,15 +1,20 @@
 import { useState,createContext, useContext, useEffect } from 'react';
 import axios from 'axios';
 const AppContext = createContext();
+import userEndpoints from "../data/userEndpoints"
+
 
 export function AppWrapper({ children }) {
   const [user,setUser] = useState(false)  
 
+  console.log("wrapper")
   const getData = async () => {
     try {
-        let res = await axios.get("/user")
-
+        let res = await axios.get(userEndpoints.user,{ withCredentials: true })
+        console.log(res)
         if (res.data && res.data.user) {
+          console.log(res.data)
+
             const {user} = res.data
             setUser(user)
         }

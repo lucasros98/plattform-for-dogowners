@@ -2,6 +2,7 @@ import {useEffect,useState} from "react"
 import { useRouter } from 'next/router'
 import axios from "axios"
 import QuizComponent from "@/components/Quiz/QuizComponent"
+import userEndpoints from "@/data/userEndpoints"
 
 export default function Quiz() {
     const [quiz,setQuiz] = useState(null)
@@ -13,7 +14,7 @@ export default function Quiz() {
     },[id])
 
     const getQuiz = async () => {
-        let res = await axios.get("/quizzes/"+id)
+        let res = await axios.get(userEndpoints.quizzes+"/"+id,{ withCredentials: true })
         if(res.data) setQuiz(res.data)
     }
 

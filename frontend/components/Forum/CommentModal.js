@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios"
 import Swal from 'sweetalert2'
+import userEndpoints from "../../data/userEndpoints"
 
 export default function CommentModal({ visible, setVisible, updatePost,id}) {
     const [show, setShow] = useState(false)
@@ -22,7 +23,7 @@ export default function CommentModal({ visible, setVisible, updatePost,id}) {
 
         const bodyData = {body:text}
 
-        axios.post("/comment/"+id,bodyData).then((res)=> {
+        axios.post(userEndpoints.forumComment+"/"+id,bodyData,{ withCredentials: true }).then((res)=> {
             if(res.data.success) {
                 close()
                 updatePost(res.data.post)

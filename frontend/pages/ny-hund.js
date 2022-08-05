@@ -1,6 +1,7 @@
 import { useState } from "react"
 import axios from "axios"
 import router from 'next/router'
+import userEndpoints from "@/data/userEndpoints"
 
 
 export default function Login() {
@@ -18,7 +19,7 @@ export default function Login() {
       birth
     }
 
-    axios.post("/dog/create",body).then((res)=> {
+    axios.post(userEndpoints.dog+"/create",body,{ withCredentials: true }).then((res)=> {
       if(res.data.success) {
         router.push('/profile', undefined, { shallow: true })
       }

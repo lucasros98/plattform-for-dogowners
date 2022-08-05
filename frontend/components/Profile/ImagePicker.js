@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import Swal from 'sweetalert2'
+import userEndpoints from "../../data/userEndpoints"
 
 export default function ImagePicker({ image }) {
     const [upload, setUpload] = useState(false)
@@ -13,10 +14,11 @@ export default function ImagePicker({ image }) {
         const data = new FormData();
         data.append("image", image)
 
-        axios.post("/image/uploadProfile", data, {
+        axios.post(userEndpoints.image+"/uploadProfile", data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
-            }
+            },
+            withCredentials: true
         }).then((res) => {
             Swal.fire({
                 title: 'Lyckades!',

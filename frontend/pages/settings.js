@@ -4,6 +4,7 @@ import ProfileImage from "@/components/Profile/Image"
 import Swal from 'sweetalert2'
 import { useAppContext } from '../contexts/AppContext';
 import { useRouter } from 'next/router'
+import userEndpoints from "@/data/userEndpoints"
 
 
 export default function Settings({ data }) {
@@ -19,7 +20,7 @@ export default function Settings({ data }) {
 
     const getData = async () => {
         try {
-            let res = await axios.get("http://localhost:3000/user")
+            let res = await axios.get(userEndpoints.user,{ withCredentials: true })
 
             if (res.data && res.data.user) {
                 const user = res.data.user;
@@ -43,7 +44,7 @@ export default function Settings({ data }) {
     };
 
     const getProfileImage = async (imageId) => {
-        let res = await axios.get("http://localhost:3000/image/" + imageId)
+        let res = await axios.get(userEndpoints.image+"/" + imageId,{ withCredentials: true })
         if (res.data.img) setPreview(res.data.img)
     }
 
@@ -60,7 +61,7 @@ export default function Settings({ data }) {
             email,
             bio
         }
-        axios.put("/user", body).then((res) => {
+        axios.put(userEndpoints.user, body,{ withCredentials: true }).then((res) => {
             Swal.fire({
                 title: 'Lyckades!',
                 text: 'Du har ändrat inställningarna för ditt konto.',
@@ -84,7 +85,7 @@ export default function Settings({ data }) {
             confirmButtonText: 'Ta bort'
          }).then((result) => {
             if(result.value){
-                axios.delete(("/user")).then((res)=> {
+                axios.delete((userEndpoints.user),{ withCredentials: true }).then((res)=> {
                     if(res.data.success) {
                         context.setUser(null)
                         router.reload()
@@ -100,10 +101,11 @@ export default function Settings({ data }) {
         const data = new FormData();
         data.append("image", image)
 
-        axios.post("/image/uploadProfile", data, {
+        axios.post(userEndpoints.image+"/uploadProfile", data, {
             headers: {
                 'Content-Type': 'multipart/form-data'
-            }
+            },
+             withCredentials: true
         }).then((res) => {
             Swal.fire({
                 title: 'Lyckades!',

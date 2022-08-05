@@ -3,8 +3,9 @@ import axios from "axios"
 import PostCard from "@/components/Forum/PostCard"
 import Link from "@/components/Link"
 import { useAppContext } from '../../contexts/AppContext';
-import CategoryButton from "@/components/Forum/CategoryButton";
 import CategoryFilter from "@/components/Forum/CategoryFilter";
+import userEndpoints from "@/data/userEndpoints"
+
 
 export default function Forum() {
     const [posts, setPosts] = useState([])
@@ -27,7 +28,7 @@ export default function Forum() {
     }, [context])
 
     const getPosts = async () => {
-        let res = await axios.get("/posts")
+        let res = await axios.get(userEndpoints.forumPosts,{ withCredentials: true })
         if (res.data && res.data.posts) {
             setPosts(res.data.posts)
 

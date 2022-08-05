@@ -11,8 +11,7 @@ const Stats = () => {
 
     const getData = async () => {
         try {
-            let res = await axios.get(userEndpoints.quizzesURL)
-            console.log(res.data)
+            let res = await axios.get(userEndpoints.user,{ withCredentials: true })
 
             if (res.data && res.data.user) {
                 setLoading(false)

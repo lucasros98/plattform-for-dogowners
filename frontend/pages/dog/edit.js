@@ -3,6 +3,7 @@ import axios from "axios"
 import router from 'next/router'
 import moment from "moment"
 import Swal from 'sweetalert2'
+import userEndpoints from "@/data/userEndpoints"
 
 export default function EditDog() {
     const [dog, setDog] = useState(null)
@@ -23,7 +24,7 @@ export default function EditDog() {
             birth
         }
 
-        axios.post("/dog/edit/" + dog._id, body).then((res) => {
+        axios.post(userEndpoints.dog+"/edit/" + dog._id, body).then((res) => {
             if (res.data.success) {
                 Swal.fire({
                     title: 'Redigerad',
@@ -44,7 +45,7 @@ export default function EditDog() {
 
     const getData = async () => {
         try {
-            let res = await axios.get("/dog")
+            let res = await axios.get(userEndpoints.dog,{ withCredentials: true })
             console.log(res.data)
 
             if (res.data && res.data.dog) {
