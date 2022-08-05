@@ -19,7 +19,6 @@
 /build
 
 #File folder
-backend/uploads
 /backend/node_modules
 
 
