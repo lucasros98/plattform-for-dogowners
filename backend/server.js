@@ -38,7 +38,7 @@ server.use(
   })
 );
 
-var allowedOrigins = ['http://localhost:3000','http://plattform-for-dogowners.vercel.app.com', 'https://plattform-for-dogowners.vercel.app.com']
+var allowedOrigins = ['http://localhost:3000','http://plattform-for-dogowners.vercel.app', 'https://plattform-for-dogowners.vercel.app','https://plattform-for-dogowners.vercel.app/','https://plattform-for-dogowners-o330xnm7s-lucasros98.vercel.app']
 var corsOptions = {
   origin: function (origin, callback) {
     if (allowedOrigins.indexOf(origin) !== -1) {
