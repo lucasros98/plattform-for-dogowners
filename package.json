@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "nodemon ./api/server.js localhost 3000",
-    "build": "next build ./frontend && node ./api/server.js",
-    "start": "next build ./frontend && node ./api/server.js",
+    "dev": "nodemon ./server.js localhost 3000",
+    "build": "next build ./frontend && node ./server.js",
+    "start": "next build ./frontend && node ./server.js",
     "lint": "next lint"
   },
   "dependencies": {

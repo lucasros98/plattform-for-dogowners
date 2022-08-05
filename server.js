@@ -6,17 +6,17 @@ const express = require('express')
 
 const session = require("express-session");
 const MongoStore = require("connect-mongo")
-const {Connection} = require('../backend/database/connection')
+const {Connection} = require('./backend/database/connection')
 
 const bodyParser = require('body-parser')
 const cookieParser = require('cookie-parser');
 const morgan = require('morgan')
 
-const passport = require("../backend/authentication/init");
+const passport = require("./backend/authentication/init");
 
 const next = require("next");
 
-const router = require('../routes')
+const router = require('./routes')
 
 Connection.connect();
 
@@ -70,3 +70,4 @@ app.prepare().then(() => {
     process.exit(1);
   });
   
+module.exports = app
