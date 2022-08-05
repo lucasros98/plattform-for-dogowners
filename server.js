@@ -24,14 +24,7 @@ const dev = process.env.NODE_ENV !== "production";
 const hostname = process.env.HOST || "localhost"
 const PORT = process.env.PORT || 3000
 
-const app = next({
-  dev:dev,
-  dir: "./frontend"
-});
-const handle = app.getRequestHandler();
 
-
-app.prepare().then(() => {
     const server = express();
 
     // Express Session
@@ -59,15 +52,11 @@ app.prepare().then(() => {
     server.use(router);
     router.use(morgan('combined'))
 
-    // handling everything else with Next.js
-    server.get("*", handle);
   
     server.listen(PORT, () => {
       console.log(`listening on PORT ${PORT}`);
     });
-  }).catch(ex => {
-    console.error(ex.stack);
-    process.exit(1);
-  });
   
-module.exports = app
+  
+  
+module.exports = server
