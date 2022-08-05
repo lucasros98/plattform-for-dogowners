@@ -6,6 +6,7 @@
     "dev": "nodemon ./server.js localhost 3000",
     "build": "NODE_ENV=production next build ./frontend && node ./server.js -p $PORT",
     "start": "NODE_ENV=production node ./server.js -p $PORT",
+    "next":"next build ./frontend",
     "lint": "next lint"
   },
   "dependencies": {
