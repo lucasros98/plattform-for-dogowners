@@ -3,6 +3,8 @@ import Link from "next/link";
 import axios from "axios";
 import QuizOption from "@/components/Quiz/QuizOption";
 import "./Quiz.module.scss"
+import endpoints from "../../data/userEndpoints"
+
 
 export default function QuizComponent ({quiz, mode}) {
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -28,7 +30,7 @@ export default function QuizComponent ({quiz, mode}) {
     const submitQuiz = () => {
       setQuizCompleted(true);
       const body = {points}
-      axios.post("/quiz/submit/"+quiz._id,body).then((res) => {
+      axios.post(endpoints.quiz+"/submit/"+quiz._id,body,{ withCredentials: true }).then((res) => {
         console.log("Quiz submitted")
       })
     };
